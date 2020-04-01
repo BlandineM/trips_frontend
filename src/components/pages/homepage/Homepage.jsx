@@ -5,9 +5,6 @@ import { NavLink } from "react-router-dom";
 function Homepage() {
   return (
     <div className="homepage">
-      <div>
-        <h2>Tu ne sais pas où et quand partir en vacances</h2>
-      </div>
       <div className="card">
         <div className="sun">
           <NavLink to="/plage">
