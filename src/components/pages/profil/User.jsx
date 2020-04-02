@@ -38,7 +38,10 @@ function User() {
         return (
           <div className="profil">
             <h1 className="name">{user.name}</h1>
-            <img src={`${user.avatar}`}></img>
+            <img src={(user.avatar != null
+              ? `${user.avatar}`
+              : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
+              alt='image de profil'></img>
           </div>
         )
       })},
