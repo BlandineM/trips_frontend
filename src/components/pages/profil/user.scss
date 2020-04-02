@@ -4,7 +4,6 @@
 .name{
   color: white;
   text-transform: capitalize;
-  font-family: 'Lora', serif;
   margin-right: 15%;
 }
 img{
@@ -13,11 +12,16 @@ img{
 
 }
 }
-.map{
-  h1{
+  .titlev{
     color: white;
-    font-family: 'Lora', serif;
   }
-
-  font-size: 1.25rem;
+  .choice-profil{
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+  }
+.map{
+  width: 80%;
+  margin: auto;
+  // font-size: 1.25rem;
 }
