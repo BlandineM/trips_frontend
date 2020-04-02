@@ -32,7 +32,7 @@ function SignIn() {
 
         })
         .then(() => {
-          // history.push("/profil");
+          history.push("/profil");
         })
         .catch(err => {
           if (err) return history.push("/connexion"), setError(true);

@@ -19,19 +19,28 @@
 
 .choice{
   display: flex;
-  color: white;
+  color: rgba(0, 80, 130, 1);
   justify-content: center;
   height: auto;
+
   .signin, .signup{
     height: 8vh;
     width: 100%;
-    background-color:rgba(0, 0, 0, .3);
+    background-color:rgba(255, 255, 255, .5);
     display: flex;
     justify-content: center;
     align-items: center;
+
+  }
+  .signin{
+    border-top-left-radius: 40px;
+
+  }
+  .signup{
+    border-top-right-radius: 40px;
   }
   .select{
-    background-color:rgba(0, 0, 0, .5);
+    background-color:rgba(255, 255, 255, .8);
     font-weight: bold;
     font-size: 1.4em;
   }
@@ -43,9 +52,11 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  color: white;
-  background-color:rgba(0, 0, 0, .5);
-  height: 15em;
+  color: rgba(0, 80, 130, 1);
+  background-color: rgba(255, 255, 255, .8);
+  height: 18em;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
   h2{
     text-align: center;
     color: #ed6663;
@@ -60,14 +71,14 @@
       background: transparent;
 	    border: none;
 	    border-bottom: 1px dashed #83A4C5;
-      color: white;
+      color: rgba(0, 80, 130, 1);
     }
     #login{
       text-transform: lowercase;
     }
   }
   .login, .name{
-    margin-left: 18%;
+    margin-left: 23%;
   }
 
   .button{
