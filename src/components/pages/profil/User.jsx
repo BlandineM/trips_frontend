@@ -17,11 +17,9 @@ function User() {
   const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
   const geoUrl =
-    "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+      "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-  const colorScale = scaleLinear()
-    .domain([0.29, 0.68])
-    .range(["#ffedea", "#ff5233"]);
+  const visitedCountry = ["FRA","BRA"];
 
   useEffect(() => {
     Axios.get(`http://localhost:5000/profil/2`).then(({ data }) => {
@@ -46,47 +44,33 @@ function User() {
       })},
       <div className="map">
         <h1>Tes voyages </h1>
-        {/* <ZoomableGroup zoom={1}> */}
-        <ComposableMap
-          projectionConfig={{
-            rotate: [-10, 0, 0],
-            scale: 147
-          }}
-        >
-          {/* <Sphere stroke="#E4E5E6" strokeWidth={0.5} /> */}
-          {/* <Graticule stroke="#E4E5E6" strokeWidth={0.5} /> */}
-          {data.length > 0 && (
+        <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
+          <ZoomableGroup>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
-                geographies.map(geo => {
-                  const d = data.find(s => s.ISO3 === geo.properties.ISO_A3);
-                  return (
-                    <Geography
-                      key={geo.rsmKey}
-                      geography={geo}
-                      fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
-                    />
-                  );
-                })
+                  geographies.map(geo => (
+                      <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          onMouseEnter={() => {
+                            console.log(geo.properties.ISO_A3);
+                          }}
+                          style={{
+                            default: {
+                              fill: visitedCountry.includes(geo.properties.ISO_A3) ? "#F53": "#D6D6DA",
+                              outline: "none"
+                            },
+                            hover: {
+                              fill: visitedCountry.includes(geo.properties.ISO_A3) ? "#F53": "#D6D6DA",
+                              outline: "none"
+                            }
+                          }}
+                      />
+                  ))
               }
             </Geographies>
-          )}
-          <Annotation
-            subject={[2.3522, 48.8566]}
-            dx={-90}
-            dy={-30}
-            connectorProps={{
-              stroke: "#FF5533",
-              strokeWidth: 3,
-              strokeLinecap: "round"
-            }}
-          >
-            <text x="-8" textAnchor="end" alignmentBaseline="middle" fill="#F53">
-              {"Paris"}
-            </text>
-          </Annotation>
+          </ZoomableGroup>
         </ComposableMap>
-        {/* </ZoomableGroup> */}
       </div>
     </div>
   );
