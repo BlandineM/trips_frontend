@@ -16,6 +16,7 @@ import {
 function User() {
   const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
+  const [choice, setChoice] = useState('map')
   const geoUrl =
       "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
@@ -45,36 +46,44 @@ function User() {
           </div>
         )
       })},
-      <div className="map">
-        <h1>Tes voyages </h1>
-        <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
-          <ZoomableGroup>
-            <Geographies geography={geoUrl}>
-              {({ geographies }) =>
-                  geographies.map(geo => (
-                      <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          onMouseEnter={() => {
-                            console.log(geo.properties.ISO_A3);
-                          }}
-                          style={{
-                            default: {
-                              fill: visitedCountry.includes(geo.properties.ISO_A3) ? "#F53": "#D6D6DA",
-                              outline: "none"
-                            },
-                            hover: {
-                              fill: visitedCountry.includes(geo.properties.ISO_A3) ? "#F53": "#D6D6DA",
-                              outline: "none"
-                            }
-                          }}
-                      />
-                  ))
-              }
-            </Geographies>
-          </ZoomableGroup>
-        </ComposableMap>
+      <h1 className="titlev">Tes voyages </h1>
+      <div className="choice-profil">
+        <h2 onClick={() => { setChoice('map') }} >Map</h2>
+        <h2 onClick={() => { setChoice('liste') }}>Liste</h2>
       </div>
+      {choice === 'map'
+        ? <div className="map">
+          <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
+            <ZoomableGroup>
+              <Geographies geography={geoUrl}>
+                {({ geographies }) =>
+                  geographies.map(geo => (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      onMouseEnter={() => {
+                        console.log(geo.properties.ISO_A3);
+                      }}
+                      style={{
+                        default: {
+                          fill: visitedCountry.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                          outline: "none"
+                        },
+                        hover: {
+                          fill: visitedCountry.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                          outline: "none"
+                        }
+                      }}
+                    />
+                  ))
+                }
+              </Geographies>
+            </ZoomableGroup>
+          </ComposableMap>
+        </div>
+        :
+        <h1>Liste des pays visités</h1>
+      }
     </div>
   );
 
