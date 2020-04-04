@@ -10,7 +10,10 @@ export default function Header() {
       <a href="/">
         <img src="https://res.cloudinary.com/blandine/image/upload/v1585598420/Harley_s_trip.png"></img>
       </a>
-      <h1 className="title">Tu ne sais pas où et quand partir en voyage?</h1>
+      <ul>
+        <li>Accueil</li>
+        <li>Mon profil</li>
+      </ul>
     </div>
   );
 }

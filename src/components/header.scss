@@ -1,16 +1,21 @@
 .header{
-font-family: 'Lora', serif;
-display: flex;
-justify-content: space-evenly;
-flex-direction: row;
-align-content: center;
-color:#faa430;
-img{
-	width: 80%;
-	height: auto;
-}
-.title{
-  margin-top: 10%;
-  margin-right: 30%;
-}
+  font-family: 'Lora', serif;
+  display: flex;
+  background-color: #031139;
+  color:#faa430;
+  img{
+    width: 40%;
+    height: auto;
+  }
+  ul{
+    display: flex;
+    flex-direction: row;
+     width: 100%;
+    li{
+      list-style: none;
+      margin: 5%;
+     
+    }
+  }
+
 }
