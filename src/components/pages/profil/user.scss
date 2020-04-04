@@ -1,0 +1,72 @@
+.container_profil{
+  width: 85%;
+  margin: auto;
+  background-color: rgba(0,168,204,0.3);
+  border-radius: 5%;
+  .title_user{
+    margin-left: 4%;
+  }
+  .profil{
+    display: flex;
+    justify-content: space-between;
+
+    .name{
+      text-transform: capitalize;
+      margin-left: 15%;
+    }
+    img{
+      border-radius: 20%;
+      width: 20%;
+      margin-right: 10%;
+    }
+  }
+  .choice-profil{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .legend{
+    width: 10%;
+    margin: 1%;
+    text-align: center;
+  }
+  .check{
+    background-color: #faa430;
+  }
+  .new{
+    background-color: #4cd3c2;
+  }
+  .mapworld, .choice-profil, .list{
+    width: 80%;
+    margin: auto;
+
+  }
+  .map, .liste{
+    text-align: center;
+    width: 50%;
+    border-radius: 4%;
+    margin: 0 5%;
+  }
+  .map:hover, .liste:hover{
+    border-bottom: solid 2px;
+    border-bottom-color: #faa430;
+    
+  }
+  .selected{
+    border-bottom: solid 2px;
+    border-bottom-color: #faa430;
+    font-weight: bold;
+    font-size: 1.7em;
+
+  }
+  .list_entete{
+    border-spacing: 10px;
+    width: 100%;
+    font-size: 1.3em;
+  }
+  .list_corps{
+    text-align: center;
+  }
+}
+
+
+

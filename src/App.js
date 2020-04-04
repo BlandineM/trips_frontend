@@ -7,6 +7,7 @@ import AddTrip from "./components/pages/new-trip/AddTrip";
 import Header from "./components/Header";
 import Sign from './components/pages/auth/Sign';
 import { Switch, Route } from "react-router-dom";
+import User from './components/pages/profil/User';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/:type/:month" component={Month} />
         <Route path="/newtrip" component={AddTrip} />
         <Route path="/connexion" component={Sign} />
+        <Route path="/profil" component={User} />
         <Route path="/:type" component={Type} />
       </Switch>
       <footer>
