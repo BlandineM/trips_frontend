@@ -17,7 +17,7 @@ function User() {
   const [choice, setChoice] = useState('map');
   const [visitedCountry, setVisitedCountry] = useState([]);
   const [test, setTest] = useState([]);
-  // const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
   const mois = [
@@ -46,31 +46,31 @@ function User() {
 
   }, []);
 
-  // function fileSelectedHandler(e) {
-  //   e.preventDefault();
-  //   console.log("e -------------------------", e.target);
+  function fileSelectedHandler(e) {
+    e.preventDefault();
+    console.log("e -------------------------", e.target);
 
-  //   setSelectedFile(e.target.files[0])
+    setSelectedFile(e.target.files[0])
 
-  //   fileUploadHandler(e);
+    fileUploadHandler(e);
 
-  //   return setSelectedFile(false);
-  // }
+    return setSelectedFile(false);
+  }
 
-  // function fileUploadHandler(e) {
-  //   e.persist();
-  //   const { selectedFile } = this.state;
-  //   const { refreshProfile } = this.props;
-  //   const formData = new FormData();
-  //   const config = {
-  //     headers: { 'content-type': 'multipart/form-data' },
-  //     timeout: 6000
-  //   };
-  //   formData.append('avatar', selectedFile);
-  //   Axios.post(`http://localhost:5000/users/2/avatar`, formData, config)
-  //     .then(refreshProfile)
-  //     .catch(console.log);
-  // }
+  function fileUploadHandler(e) {
+    e.persist();
+    const { selectedFile } = this.state;
+    const { refreshProfile } = this.props;
+    const formData = new FormData();
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+      timeout: 6000
+    };
+    formData.append('avatar', selectedFile);
+    Axios.post(`http://localhost:5000/users/2/avatar`, formData, config)
+      .then(refreshProfile)
+      .catch(console.log);
+  }
 
   console.log("test-----------", test[0]);
 
@@ -92,14 +92,15 @@ function User() {
             ? `${user.avatar}`
             : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
             alt='image de profil'></img>
-          {/* <input
+          <input
             style={{ display: 'none' }}
             type="file"
             name="avatar"
             accept="image/x-png,image/gif,image/jpeg"
             onChange={(e) => { fileSelectedHandler(e); }}
+          // ref={(fileInput) => { this.fileInput = fileInput; }}
           />
-          <button type="button" onClick={fileSelectedHandler}>Modifier mon avatar</button> */}
+          <button type="button" >Modifier mon avatar</button>
 
         </div>
       </div>
