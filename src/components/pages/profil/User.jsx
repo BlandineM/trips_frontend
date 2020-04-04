@@ -149,8 +149,8 @@ function User() {
             </ComposableMap>
           </div>
           :
-          <div className="list">
-            <table>
+          <div>
+            <table className="list_entete">
               <thead>
                 <th>Nom du pays</th>
                 <th>Période voyagé</th>
@@ -159,7 +159,7 @@ function User() {
 
               {user.countries.map((country) => {
                 return (
-                  <tbody>
+                  <tbody className="list_corps">
                     <td>{country.pays_name}</td>
                     <td>{mois[country.periode_month]}</td>
                     <td>{country.year}</td>
