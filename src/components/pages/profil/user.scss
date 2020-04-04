@@ -44,6 +44,7 @@
     text-align: center;
     width: 50%;
     border-radius: 4%;
+    margin: 0 5%;
   }
   .map:hover, .liste:hover{
     border-bottom: solid 2px;
@@ -57,11 +58,13 @@
     font-size: 1.7em;
 
   }
-  .list{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+  .list_entete{
+    border-spacing: 10px;
+    width: 100%;
+    font-size: 1.3em;
+  }
+  .list_corps{
+    text-align: center;
   }
 }
 
