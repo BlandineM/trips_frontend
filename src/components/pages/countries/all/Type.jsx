@@ -26,6 +26,7 @@ function Type() {
             <div key={i} className="cards">
               <div className="image">
                 <div className="info_countries">
+                  <h2 className="tripeur">1 personne a déjà été ici</h2>
                   <h2>{pays.nameFr != null
                     ? pays.nameFr
                     : pays.name}</h2>
