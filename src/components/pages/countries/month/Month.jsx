@@ -25,14 +25,14 @@ function Month() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/${type}/${month}/advised`).then(({ data }) => {
+    axios.get(`http://localhost:5000/type/${type}/${month}/advised`).then(({ data }) => {
       setfilterG(data);
     });
-    axios.get(`http://localhost:5000/${type}/${month}/wrong`).then(({ data }) => {
+    axios.get(`http://localhost:5000/type/${type}/${month}/wrong`).then(({ data }) => {
       setfilterB(data);
     });
 
-  }, [setfilterG, setfilterB, month]);
+  }, [setfilterG, setfilterB, month, type]);
 
 
   return (
