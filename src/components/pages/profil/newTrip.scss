@@ -1,0 +1,21 @@
+form{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  background-color: #005082;
+  border-radius: 20px;
+  height: 50vh;
+  .country, .monthly{
+    display: flex;
+    justify-content: center;
+    margin: 10% auto;
+    #year, #countries, #month{
+      margin-left: 5%;
+    } 
+  }
+
+  .valider{
+    margin: 5% auto;
+  }
+}
