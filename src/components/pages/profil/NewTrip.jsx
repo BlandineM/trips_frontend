@@ -15,12 +15,8 @@ function NewTrip() {
       setCountries(data)
     });
     Axios.get(`http://localhost:5000/profil/2`).then(({ data }) => {
-      console.log(data);
-
       setVisitedCountry(data.countries.map((country) => { return (country.pays_name) }));
-
     });
-
   }, [])
 
   function valider(e) {
@@ -31,7 +27,6 @@ function NewTrip() {
       id_users: 2
     })
   }
-  console.log(visitedCountry);
 
   return (
     <div className="trip">
@@ -91,7 +86,5 @@ function NewTrip() {
 
     </div>
   )
-
 }
-
 export default NewTrip;
