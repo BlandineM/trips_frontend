@@ -27,10 +27,10 @@ function Month() {
   };
 
   useEffect(() => {
-    axios.get(`${apiSite}/${type}/${month}/advised`).then(({ data }) => {
+    axios.get(`${apiSite}/type/${type}/periode/${month}/advised/advised`).then(({ data }) => {
       setfilterG(data);
     });
-    axios.get(`${apiSite}/${type}/${month}/wrong`).then(({ data }) => {
+    axios.get(`${apiSite}/${type}/${month}/advised/wrong`).then(({ data }) => {
       setfilterB(data);
     });
 
