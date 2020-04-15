@@ -3,7 +3,7 @@ import axios from "axios";
 import NavBar from "../../../NavBar";
 import "./type.scss";
 import { useParams } from "react-router-dom";
-const { apiSite } = require("../../../conf");
+const { apiSite } = require("../../../../conf");
 
 function Type() {
   const [pays, setpays] = useState([]);
