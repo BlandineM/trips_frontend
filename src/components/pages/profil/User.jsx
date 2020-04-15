@@ -11,6 +11,7 @@ import {
   Annotation,
   ZoomableGroup
 } from "react-simple-maps";
+const { apiSite } = require("../../../conf");
 
 function User() {
   const [user, setUser] = useState([]);
@@ -38,7 +39,7 @@ function User() {
 
 
   useEffect(() => {
-    Axios.get(`http://localhost:5000/profil/2`).then(({ data }) => {
+    Axios.get(`${apiSite}/profil/2`, {
       setUser(data);
       setVisitedCountry(data.countries.map((country) => { return (country.code) }));
       setTest(data.countries.map((country) => country))
@@ -67,7 +68,7 @@ function User() {
       timeout: 6000
     };
     formData.append('avatar', selectedFile);
-    Axios.post(`http://localhost:5000/users/2/avatar`, formData, config)
+    Axios.post(`${apiSite}/users/2/avatar`, formData, config)
       .then(refreshProfile)
       .catch(console.log);
   }

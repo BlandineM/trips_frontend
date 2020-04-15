@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./sign.scss"
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+const { apiSite } = require("../../../conf");
 
 function SignIn() {
   let history = useHistory();
@@ -16,12 +17,12 @@ function SignIn() {
 
     status === "signin"
       ? axios
-        .post(`http://localhost:5000/auth/login`, {
+        .post(`${apiSite}/auth/login`, {
           login,
           password
         })
       : axios
-        .post(`http://localhost:5000/auth/signup`, {
+        .post(`${apiSite}/auth/signup`, {
           login,
           name,
           password

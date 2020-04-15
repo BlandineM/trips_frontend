@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./addTrip.scss";
 import axios from "axios";
 
+const { apiSite } = require("../../../conf");
 export default function Addtrip() {
   const history = useHistory();
   const [pays, setPays] = useState("");
@@ -33,7 +34,7 @@ export default function Addtrip() {
   function addTrip() {
     const sqlName = sqlNameByType(type);
     axios
-      .post(`http://localhost:5000/plage/01/newtrip`, {
+      .post(`${apiSite}/plage/01/newtrip`, {
         pays
       })
       .then(({ data }) => {

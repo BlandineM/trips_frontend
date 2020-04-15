@@ -3,13 +3,14 @@ import axios from "axios";
 import NavBar from "../../../NavBar";
 import "./type.scss";
 import { useParams } from "react-router-dom";
+const { apiSite } = require("../../../conf");
 
 function Type() {
   const [pays, setpays] = useState([]);
   const { type } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/${type}`).then(({ data }) => {
+    axios.get(`${apiSite}/${type}`).then(({ data }) => {
       setpays(data);
     });
   }, [setpays, type]);
