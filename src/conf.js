@@ -1,5 +1,3 @@
 require("dotenv").config();
-
-let CONFIG = {};
-CONFIG.apiSite = process.env.REACT_APP_LOCALHOST;
-module.exports = CONFIG;
+const apiSite = process.env.REACT_APP_LOCALHOST || "find_the_address";
+module.exports = { apiSite };

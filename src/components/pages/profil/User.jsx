@@ -12,7 +12,7 @@ import {
   Annotation,
   ZoomableGroup
 } from "react-simple-maps";
-const { apiSite } = require("../../../conf");
+const { apiSite } = require("../../../conf")
 
 function User() {
   const [profil, setProfil] = useState([]);

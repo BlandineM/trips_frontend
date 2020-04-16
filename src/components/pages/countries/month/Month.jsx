@@ -30,7 +30,7 @@ function Month() {
     axios.get(`${apiSite}/type/${type}/periode/${month}/advised/advised`).then(({ data }) => {
       setfilterG(data);
     });
-    axios.get(`${apiSite}/${type}/${month}/advised/wrong`).then(({ data }) => {
+    axios.get(`${apiSite}/type/${type}/periode/${month}/advised/wrong`).then(({ data }) => {
       setfilterB(data);
     });
 
