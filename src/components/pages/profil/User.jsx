@@ -173,6 +173,7 @@ function User() {
 
           </div>
       }
+      <h1>Ajoute un voyage </h1>
     </div >
   );
 

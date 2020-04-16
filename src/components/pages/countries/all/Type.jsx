@@ -9,7 +9,7 @@ function Type() {
   const { type } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/${type}`).then(({ data }) => {
+    axios.get(`http://localhost:5000/type/${type}`).then(({ data }) => {
       setpays(data);
     });
   }, [setpays, type]);

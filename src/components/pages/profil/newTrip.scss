@@ -1,0 +1,54 @@
+.trip{
+  display: flex;
+  .lastTrip, .nextTrip{
+    width: 50%;
+    margin: 1% 5%;
+    h1{
+      text-align: center;
+    }
+  }
+  .lastTrip{
+    background-color: rgba(255,164,27,0.3);
+    border-radius: 20px;
+    ul{
+      display: flex;
+      li{
+        list-style-type: none;
+        margin: auto;
+        font-size: 1.2em;
+      }
+    }
+  }
+  .nextTrip{
+    form{
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      background-color: #ffa41b;
+      border-radius: 20px;
+      .country, .monthly{
+        display: flex;
+        justify-content: center;
+        margin: 1% auto 10% auto;
+        #year, #countries, #month{
+          margin-left: 5%;
+        } 
+      }
+      .valider{
+        margin: 5% auto;
+        background-color: transparent;
+        border-color: #1f2e4b;
+        color: #1f2e4b;
+        border-radius: 50px;
+        height: 50px;
+        font-weight: bold;
+        font-size: 1.5em;
+        transition: all 1s ease-out;
+      }
+      .valider:hover{
+        background-color: #1f2e4b;
+        color: #ffa41b;
+      }
+  }
+}
+}
