@@ -44,18 +44,30 @@ function Month() {
         url('https://fonts.googleapis.com/css?family=Indie+Flower|Lobster&display=swap');
       </style>
       <h1 className="title">Direction {type} </h1>
+
       <NavBar place={type} />
+
       <div className="destinations">
+
         <div className="titlecard">
           <h2>En {mois[month]} tu peux visiter</h2>
+
           <div className="destinationsG">
             {filterG.map((pays, i) => {
               return (
+
                 <div key={i} className="cards">
+
                   <div className="image">
-                    <h2>{pays.nameFr != null
-                      ? pays.nameFr
-                      : pays.name}</h2>
+
+                    <div className="info_countries">
+                      <h2 className="tripeur">1 personne a déjà été ici</h2>
+                      <h2>{pays.nameFr != null
+                        ? pays.nameFr
+                        : pays.name}</h2>
+                      <img className="info_pays" src={`${pays.flag}`}></img>
+                    </div>
+
                     <img
                       className="destinationPicture"
                       src={pays.pictures != null
@@ -64,6 +76,7 @@ function Month() {
                       alt={`${pays.name}`}
                     ></img>
                   </div>
+
                 </div>
               );
             })}
@@ -79,14 +92,23 @@ function Month() {
 
         <div className="titlecard">
           <h2>Déconseillé en {mois[month]}</h2>
+
           <div className="destinationsB">
             {filterB.map((pays, i) => {
               return (
+
                 <div key={i} className="cards">
+
                   <div className="image">
-                    <h2>{pays.nameFr != null
-                      ? pays.nameFr
-                      : pays.name}</h2>
+
+                    <div className="info_countries">
+                      <h2 className="tripeur">1 personne a déjà été ici</h2>
+                      <h2>{pays.nameFr != null
+                        ? pays.nameFr
+                        : pays.name}</h2>
+                      <img className="info_pays" src={`${pays.flag}`}></img>
+                    </div>
+
                     <img
                       className="destinationPicture"
                       src={pays.pictures != null
@@ -95,12 +117,17 @@ function Month() {
                       alt={`${pays.name}`}
                     ></img>
                   </div>
+
                 </div>
+
               );
             })}
           </div>
+
         </div>
+
       </div>
+
     </div>
   );
 }
