@@ -10,7 +10,9 @@ function Type() {
   const { type } = useParams();
 
   useEffect(() => {
+
     axios.get(`${apiSite}/type/${type}/countries`).then(({ data }) => {
+
       setpays(data);
     });
   }, [setpays, type]);

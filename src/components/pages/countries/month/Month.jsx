@@ -31,6 +31,7 @@ function Month() {
       setfilterG(data);
     });
     axios.get(`${apiSite}/type/${type}/periode/${month}/advised/wrong`).then(({ data }) => {
+
       setfilterB(data);
     });
 
