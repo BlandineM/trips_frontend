@@ -5,18 +5,22 @@ import "./type.scss";
 import { useParams } from "react-router-dom";
 
 const { apiSite } = require("../../../../conf")
+
 function Type() {
   const [pays, setpays] = useState([]);
+  const [trippers, setTripper] = useState([]);
   const { type } = useParams();
 
   useEffect(() => {
-
     axios.get(`${apiSite}/type/${type}/countries`).then(({ data }) => {
-
       setpays(data);
     });
+    axios.get(`${apiSite}/countries/tripper`).then(({ data }) => {
+      setTripper(data)
+    })
   }, [setpays, type]);
 
+  console.log("tripper", trippers);
 
   return (
     <div className="main">
@@ -29,11 +33,17 @@ function Type() {
           return (
 
             <div key={i} className="cards">
+              <h2>{pays.nameFr}</h2>
 
               <div className="image">
 
                 <div className="info_countries">
-                  <h2 className="tripeur">1 personne a déjà été ici</h2>
+                  {trippers.map((tripper) => {
+                    return (
+                      ((pays.id_pays === tripper.id_pays)
+                        ? (<h2 className="tripeur">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes" : "personne"} à déjà été ici</h2>)
+                        : (<h2 className="tripeur"></h2>)))
+                  })}
                   <h2>{pays.nameFr != null
                     ? pays.nameFr
                     : pays.name}</h2>
@@ -51,7 +61,9 @@ function Type() {
 
             </div>
           );
-        })}
+        })
+
+        }
       </div>
 
     </div >
