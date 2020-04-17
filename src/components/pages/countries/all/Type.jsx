@@ -31,9 +31,7 @@ function Type() {
       <div className="destinations">
         {pays.map((pays, i) => {
           return (
-
             <div key={i} className="cards">
-              <h2>{pays.nameFr}</h2>
 
               <div className="image">
 
