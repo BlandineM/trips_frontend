@@ -2,35 +2,39 @@ import React, { useState } from "react";
 import "./sign.scss"
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useDispatch, connect } from "react-redux";
+const { apiSite } = require("../../../conf");
 
-function SignIn() {
+function Sign() {
   let history = useHistory();
   const [login, setLogin] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [status, setStatus] = useState("signin")
+  const dispatch = useDispatch();
 
   const sublogin = e => {
     e.preventDefault();
 
     status === "signin"
-      ? axios
-        .post(`http://localhost:5000/auth/login`, {
+      ? (axios
+        .post(`${apiSite}/auth/login`, {
           login,
           password
         })
-      : axios
-        .post(`http://localhost:5000/auth/signup`, {
+        .then(({ data }) => {
+          dispatch({ type: "FETCHING_USER_DATA", value: data });
+        }))
+      : (axios
+        .post(`${apiSite}/auth/signup`, {
           login,
           name,
           password
-        })
+        }).then(({ data }) => {
+          dispatch({ type: "CREATE_USER_DATA", value: data });
+        }))
 
-
-        .then(({ data }) => {
-
-        })
         .then(() => {
           history.push("/profil");
         })
@@ -83,5 +87,8 @@ function SignIn() {
 
   )
 }
+const mapStateToProps = state => {
+  return { user: state.user };
+};
 
-export default SignIn;
+export default connect(mapStateToProps)(Sign);
