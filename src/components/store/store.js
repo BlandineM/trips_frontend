@@ -3,9 +3,8 @@ const initialState = {
   NextTrip: [],
   user: {
     id: -1,
-    mail: "",
-    name: "",
-    token: "",
+    login: "",
+    token: ""
   },
   ProfilIsOpen: false
 };

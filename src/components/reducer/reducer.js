@@ -10,8 +10,7 @@ const reducer = (state = initialState, action) => {
 
     case "CREATE_USER_DATA":
       newState.user.id = action.value.returnData.id;
-      newState.user.mail = action.value.returnData.mail;
-      newState.user.name = action.value.returnData.name;
+      newState.user.login = action.value.returnData.login;
       newState.user.token = action.value.token;
       return newState;
 
@@ -21,8 +20,7 @@ const reducer = (state = initialState, action) => {
         ...newState,
         user: {
           id: data.user.id,
-          mail: data.user.mail,
-          name: data.user.name,
+          login: data.user.login,
           token: data.token,
         }
       };
