@@ -17,7 +17,9 @@ const { apiSite } = require("../../../conf")
 function User() {
   const [profil, setProfil] = useState([]);
   const [choice, setChoice] = useState('map');
+  const [check, setCheck] = useState('fait');
   const toPassed = useSelector(state => state.LastTrip);
+  const toNext = useSelector(state => state.NextTrip);
   const [test, setTest] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const user = useSelector(state => state.user);
@@ -49,7 +51,12 @@ function User() {
     }).then(({ data }) => {
       setProfil(data);
       dispatch({ type: "DATA_LAST_TRIP", data: data.countries });
+    });
 
+    Axios.get(`${apiSite}/nextTrip/user/2`, {
+      // headers: { Authorization: `Bearer ${token}` }
+    }).then(({ data }) => {
+      dispatch({ type: "DATA_NEXT_TRIP", data: data });
     });
 
   }, [dispatch, token, user.id]);
@@ -77,6 +84,7 @@ function User() {
   }
 
   const codeVisited = toPassed.map((c) => { return c.code })
+  const codeToVisit = toNext.map((c) => { return c.code })
   return (
 
     <div className="container_profil">
@@ -117,8 +125,8 @@ function User() {
           <div className="mapworld">
 
             <div>
-              <h3 className="legend check">Fait</h3>
-              <h3 className="legend new">A faire</h3>
+              <h3 onClick={() => { setCheck('fait') }} className="legend check">Fait</h3>
+              <h3 onClick={() => { setCheck('aFaire') }} className="legend new">A faire</h3>
             </div>
 
             <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
@@ -129,18 +137,20 @@ function User() {
                       <Geography
                         key={geo.rsmKey}
                         geography={geo}
+
                         onMouseEnter={() => {
                           console.log(geo.properties.ISO_A3);
                         }}
                         style={{
                           default: {
-                            fill: codeVisited.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "#ffa41b" : "#4cd3c2") : "#D6D6DA",
                             outline: "none"
                           },
                           hover: {
-                            fill: codeVisited.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "#ffa41b" : "#4cd3c2") : "#D6D6DA",
                             outline: "none"
                           }
+
                         }}
                       />
                     ))
@@ -169,6 +179,13 @@ function User() {
                 )
               })}
             </table>
+            <h2>Les prochains</h2>
+            <ul>
+              {toNext.map((country) => {
+                return (<li>{country.pays_name}</li>)
+              })}
+
+            </ul>
           </div>
 
       }
