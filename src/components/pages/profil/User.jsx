@@ -76,8 +76,7 @@ function User() {
       .catch(console.log);
   }
 
-
-
+  const codeVisited = toPassed.map((c) => { return c.code })
   return (
 
     <div className="container_profil">
@@ -135,11 +134,11 @@ function User() {
                         }}
                         style={{
                           default: {
-                            fill: toPassed.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                            fill: codeVisited.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
                             outline: "none"
                           },
                           hover: {
-                            fill: toPassed.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                            fill: codeVisited.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
                             outline: "none"
                           }
                         }}
