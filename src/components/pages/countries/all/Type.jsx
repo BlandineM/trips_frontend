@@ -39,7 +39,7 @@ function Type() {
                   {trippers.map((tripper) => {
                     return (
                       ((pays.id_pays === tripper.id_pays)
-                        ? (<h2 className="tripeur">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes" : "personne"} à déjà été ici</h2>)
+                        ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici</h2>)
                         : ("")))
                   })}
                   <h2>{pays.nameFr != null

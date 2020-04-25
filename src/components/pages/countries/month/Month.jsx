@@ -67,7 +67,7 @@ function Month() {
                       {trippers.map((tripper) => {
                         return (
                           ((pays.id_pays === tripper.id_pays)
-                            ? (<h2 className="tripeur">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes" : "personne"} à déjà été ici en {mois[month]}</h2>)
+                            ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
                             : ("")))
                       })}
                       <h2>{pays.nameFr != null
@@ -113,7 +113,7 @@ function Month() {
                       {trippers.map((tripper) => {
                         return (
                           ((pays.id_pays === tripper.id_pays)
-                            ? (<h2 className="tripeur">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes" : "personne"} à déjà été ici en {mois[month]}</h2>)
+                            ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
                             : ("")))
                       })}
                       <h2>{pays.nameFr != null
