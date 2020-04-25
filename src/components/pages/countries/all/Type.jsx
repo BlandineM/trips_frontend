@@ -31,9 +31,7 @@ function Type() {
       <div className="destinations">
         {pays.map((pays, i) => {
           return (
-
             <div key={i} className="cards">
-              <h2>{pays.nameFr}</h2>
 
               <div className="image">
 
@@ -41,8 +39,8 @@ function Type() {
                   {trippers.map((tripper) => {
                     return (
                       ((pays.id_pays === tripper.id_pays)
-                        ? (<h2 className="tripeur">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes" : "personne"} à déjà été ici</h2>)
-                        : (<h2 className="tripeur"></h2>)))
+                        ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici</h2>)
+                        : ("")))
                   })}
                   <h2>{pays.nameFr != null
                     ? pays.nameFr

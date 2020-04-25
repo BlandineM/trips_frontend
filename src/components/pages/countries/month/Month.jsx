@@ -10,6 +10,7 @@ const { apiSite } = require("../../../../conf");
 function Month() {
   const [filterG, setfilterG] = useState([]);
   const [filterB, setfilterB] = useState([]);
+  const [trippers, setTripper] = useState([]);
   const { month, type } = useParams();
   const mois = {
     "01": "Janvier",
@@ -31,10 +32,11 @@ function Month() {
       setfilterG(data);
     });
     axios.get(`${apiSite}/type/${type}/periode/${month}/advised/wrong`).then(({ data }) => {
-
       setfilterB(data);
     });
-
+    axios.get(`${apiSite}/countries/tripper/periode/${month}`).then(({ data }) => {
+      setTripper(data)
+    })
   }, [setfilterG, setfilterB, month, type]);
 
 
@@ -62,7 +64,12 @@ function Month() {
                   <div className="image">
 
                     <div className="info_countries">
-                      <h2 className="tripeur">1 personne a déjà été ici</h2>
+                      {trippers.map((tripper) => {
+                        return (
+                          ((pays.id_pays === tripper.id_pays)
+                            ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
+                            : ("")))
+                      })}
                       <h2>{pays.nameFr != null
                         ? pays.nameFr
                         : pays.name}</h2>
@@ -103,7 +110,12 @@ function Month() {
                   <div className="image">
 
                     <div className="info_countries">
-                      <h2 className="tripeur">1 personne a déjà été ici</h2>
+                      {trippers.map((tripper) => {
+                        return (
+                          ((pays.id_pays === tripper.id_pays)
+                            ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
+                            : ("")))
+                      })}
                       <h2>{pays.nameFr != null
                         ? pays.nameFr
                         : pays.name}</h2>
