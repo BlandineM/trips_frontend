@@ -17,7 +17,9 @@ const { apiSite } = require("../../../conf")
 function User() {
   const [profil, setProfil] = useState([]);
   const [choice, setChoice] = useState('map');
+  const [check, setCheck] = useState('fait');
   const toPassed = useSelector(state => state.LastTrip);
+  const toNext = useSelector(state => state.NextTrip);
   const [test, setTest] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const user = useSelector(state => state.user);
@@ -49,7 +51,12 @@ function User() {
     }).then(({ data }) => {
       setProfil(data);
       dispatch({ type: "DATA_LAST_TRIP", data: data.countries });
+    });
 
+    Axios.get(`${apiSite}/nextTrip/user/2`, {
+      // headers: { Authorization: `Bearer ${token}` }
+    }).then(({ data }) => {
+      dispatch({ type: "DATA_NEXT_TRIP", data: data });
     });
 
   }, [dispatch, token, user.id]);
@@ -76,8 +83,8 @@ function User() {
       .catch(console.log);
   }
 
-
-
+  const codeVisited = toPassed.map((c) => { return c.code })
+  const codeToVisit = toNext.map((c) => { return c.code })
   return (
 
     <div className="container_profil">
@@ -86,20 +93,22 @@ function User() {
         <h1 className="title_user">Informations:</h1>
 
         <div className="profil">
-          <h2 className="name">{user.name}</h2>
-          <img src={(profil.avatar != null
-            ? `${user.avatar}`
-            : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
-            alt='image de profil'></img>
-          <input
-            style={{ display: 'none' }}
-            type="file"
-            name="avatar"
-            accept="image/x-png,image/gif,image/jpeg"
-            onChange={(e) => { fileSelectedHandler(e); }}
-          // ref={(fileInput) => { this.fileInput = fileInput; }}
-          />
-          <button type="button" >Modifier mon avatar</button>
+          <h2 className="name">{profil.name}</h2>
+          <div className="picture">
+            <img src={(profil.avatar != null
+              ? `${profil.avatar}`
+              : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
+              alt='image de profil'></img>
+            <input
+              style={{ display: 'none' }}
+              type="file"
+              name="avatar"
+              accept="image/x-png,image/gif,image/jpeg"
+              onChange={(e) => { fileSelectedHandler(e); }}
+            // ref={(fileInput) => { this.fileInput = fileInput; }}
+            />
+            <button type="button" >Modifier mon avatar</button>
+          </div>
         </div>
 
       </div>
@@ -118,8 +127,8 @@ function User() {
           <div className="mapworld">
 
             <div>
-              <h3 className="legend check">Fait</h3>
-              <h3 className="legend new">A faire</h3>
+              <h3 onClick={() => { setCheck('fait') }} className="legend check">Fait</h3>
+              <h3 onClick={() => { setCheck('aFaire') }} className="legend new">A faire</h3>
             </div>
 
             <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
@@ -130,18 +139,20 @@ function User() {
                       <Geography
                         key={geo.rsmKey}
                         geography={geo}
+
                         onMouseEnter={() => {
                           console.log(geo.properties.ISO_A3);
                         }}
                         style={{
                           default: {
-                            fill: toPassed.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "#ffa41b" : "#4cd3c2") : "#D6D6DA",
                             outline: "none"
                           },
                           hover: {
-                            fill: toPassed.includes(geo.properties.ISO_A3) ? "#ffa41b" : "#D6D6DA",
+                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "#ffa41b" : "#4cd3c2") : "#D6D6DA",
                             outline: "none"
                           }
+
                         }}
                       />
                     ))
@@ -153,8 +164,9 @@ function User() {
 
           :
 
-          <div>
-            <table className="list_entete">
+          <div className="list_countries">
+            <h2 onClick={() => { setCheck('fait') }} className={`check titre `}>Fait</h2>
+            <table className={`list_entete${check === "fait" ? " visible" : ""}`}>
               <thead>
                 <th>Nom du pays</th>
                 <th>Période voyagé</th>
@@ -170,10 +182,28 @@ function User() {
                 )
               })}
             </table>
+            <h2 onClick={() => { setCheck('aFaire') }} className={`new titre`}>A faire</h2>
+            <table className={`list_entete${check === "aFaire" ? " visible" : ""}`}>
+              <thead>
+                <th>Nom du pays</th>
+              </thead>
+              {toNext.map((country) => {
+                return (
+                  <tbody className="list_corps">
+                    <td>{country.pays_name}</td>
+                  </tbody>
+                )
+              })}
+            </table>
+
+            <ul>
+
+
+            </ul>
           </div>
 
       }
-      <h1>Ajoute un voyage </h1>
+      <h1 className="title_user">Ajoute un voyage </h1>
     </div >
 
   );

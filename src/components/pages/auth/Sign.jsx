@@ -11,36 +11,37 @@ function Sign() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [error2, setError2] = useState(false);
   const [status, setStatus] = useState("signin")
   const dispatch = useDispatch();
 
   const sublogin = e => {
     e.preventDefault();
-
-    status === "signin"
+    (status === "signin"
       ? (axios
         .post(`${apiSite}/auth/login`, {
           login,
           password
         })
         .then(({ data }) => {
+          history.push("/profil");
           dispatch({ type: "FETCHING_USER_DATA", value: data });
+        })
+        .catch(err => {
+          if (err) return history.push("/connexion"), setError(true);
         }))
       : (axios
         .post(`${apiSite}/auth/signup`, {
           login,
-          name,
           password
         }).then(({ data }) => {
+          history.push("/profil");
           dispatch({ type: "CREATE_USER_DATA", value: data });
         }))
-
-        .then(() => {
-          history.push("/profil");
-        })
-        .catch(err => {
-          if (err) return history.push("/connexion"), setError(true);
-        });
+    )
+      .catch(err => {
+        if (err) return console.log(err), setError2(true);
+      })
   };
 
   return (<div className="form">
@@ -55,6 +56,9 @@ function Sign() {
 
       {error
         ? <h2>Votre identifiant ou mot de passe est incorrect</h2>
+        : null}
+      {error2
+        ? <h2>Votre email est déjà enregistré</h2>
         : null}
 
       {status === "signup"
