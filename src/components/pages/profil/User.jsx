@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Axios from 'axios';
+import axios from 'axios';
 import "./user.scss"
 // import Data from '/data/data.json'
 import {
   ComposableMap,
   Geographies,
   Geography,
-  Sphere,
-  Graticule,
-  Annotation,
   ZoomableGroup
 } from "react-simple-maps";
+import Message from './Message';
+import Progress from './Progress';
+
 const { apiSite } = require("../../../conf")
 
 function User() {
   const [profil, setProfil] = useState([]);
   const [choice, setChoice] = useState('map');
   const [check, setCheck] = useState('fait');
+  const [file, setFile] = useState('');
+  const [filename, setFilename] = useState('Choose File');
+  const [uploadedFile, setUploadedFile] = useState({});
+  const [message, setMessage] = useState('');
+  const [uploadPercentage, setUploadPercentage] = useState(0);
   const toPassed = useSelector(state => state.LastTrip);
   const toNext = useSelector(state => state.NextTrip);
-  const [test, setTest] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null);
   const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
   const token = useSelector(state => state.user.token);
+  const dispatch = useDispatch();
 
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -46,45 +49,62 @@ function User() {
 
 
   useEffect(() => {
-    Axios.get(`${apiSite}/profil/${user.id}`, {
-      headers: { Authorization: `Bearer ${token}` }
+    axios.get(`${apiSite}/profil/2`, {
+      // headers: { Authorization: `Bearer ${token}` }
     }).then(({ data }) => {
       setProfil(data);
       dispatch({ type: "DATA_LAST_TRIP", data: data.countries });
     });
 
-    Axios.get(`${apiSite}/nextTrip/user/2`, {
+    axios.get(`${apiSite}/profil/users/2/nextTrip`, {
       // headers: { Authorization: `Bearer ${token}` }
     }).then(({ data }) => {
       dispatch({ type: "DATA_NEXT_TRIP", data: data });
     });
 
-  }, [dispatch, token, user.id]);
-
-  function fileSelectedHandler(e) {
-    e.preventDefault();
-    setSelectedFile(e.target.files[0])
-    fileUploadHandler(e);
-    return setSelectedFile(false);
-  }
-
-  function fileUploadHandler(e) {
-    e.persist();
-    const { selectedFile } = this.state;
-    const { refreshProfile } = this.props;
-    const formData = new FormData();
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' },
-      timeout: 6000
-    };
-    formData.append('avatar', selectedFile);
-    Axios.post(`${apiSite}/users/${user.id}/avatar`, formData, config)
-      .then(refreshProfile)
-      .catch(console.log);
-  }
+  }, [profil, dispatch]);
 
   const codeVisited = toPassed.map((c) => { return c.code })
   const codeToVisit = toNext.map((c) => { return c.code })
+
+
+  const onChange = e => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await axios.post('http://localhost:5000/profil/2/avatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: progressEvent => {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            )
+          );
+
+          // Clear percentage
+          setTimeout(() => setUploadPercentage(0), 10000);
+        }
+      });
+
+      const { fileName, filePath } = res.data;
+
+      setUploadedFile({ fileName, filePath });
+
+      setMessage('File Uploaded');
+    } catch (err) {
+
+    }
+  };
+
   return (
 
     <div className="container_profil">
@@ -93,21 +113,42 @@ function User() {
         <h1 className="title_user">Informations:</h1>
 
         <div className="profil">
-          <h2 className="name">{profil.name}</h2>
+          <div>
+            <h2 className="name">{profil.name}</h2>
+            <h2 className="name">age</h2>
+            <p className="name">Description</p>
+            <img src="./pen.png" alt="" />
+          </div>
           <div className="picture">
             <img src={(profil.avatar != null
               ? `${profil.avatar}`
               : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
               alt='image de profil'></img>
-            <input
-              style={{ display: 'none' }}
-              type="file"
-              name="avatar"
-              accept="image/x-png,image/gif,image/jpeg"
-              onChange={(e) => { fileSelectedHandler(e); }}
-            // ref={(fileInput) => { this.fileInput = fileInput; }}
-            />
-            <button type="button" >Modifier mon avatar</button>
+            {message ? <Message msg={message} /> : null}
+            <form onSubmit={onSubmit}>
+              <div className='custom-file mb-4'>
+                <input
+                  type='file'
+                  className='custom-file-input'
+                  id='customFile'
+                  accept="image/x-png,image/gif,image/jpeg"
+                  onChange={onChange}
+                >
+
+
+                </input>
+                <label className='custom-file-label' htmlFor='customFile'>
+                </label>
+              </div>
+
+              <Progress percentage={uploadPercentage} />
+
+              <input
+                type='submit'
+                value='Upload'
+                className='btn btn-primary btn-block mt-4'
+              />
+            </form>
           </div>
         </div>
 
