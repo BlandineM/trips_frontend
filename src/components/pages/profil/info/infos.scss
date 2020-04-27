@@ -1,0 +1,41 @@
+.profil{
+  width: 85%;
+  margin: auto;
+  margin-top: 2%;
+  // background-color: rgba(39,73,109,1);
+  background-color: #faa430;
+  border-radius: 20px;
+  height: 250px;
+  .picture{
+    img{
+      border-radius: 20px;
+      width: 15%;
+      opacity: 0.8;
+      position: absolute;
+      top: 185px;
+      left: 173px;
+      max-height: 230px;
+      object-fit: contain;
+    }
+    img:hover{
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+  .name{
+    position: absolute;
+    color: white;
+    top: 200px;
+    left: 345px;
+    font-size: 5em;
+    text-transform: capitalize;
+  }
+  .countries{
+    position: absolute;
+    color: white;
+    top: 275px;
+    left: 400px;
+    font-size: 3em;
+  }
+
+}

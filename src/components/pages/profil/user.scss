@@ -1,36 +1,9 @@
 .container_profil{
-  width: 85%;
-  margin: auto;
-  margin-top: 2%;
-  background-color: rgba(39,73,109,1);
-  border-radius: 20px;
-  height: 150vh;
   .title_user{
     margin-left: 4%;
     color: white;
   }
-  .profil{
-    display: flex;
-    justify-content: space-between;
-    .test{
-      margin: auto;
-    .picture{
-      margin: auto;
-      width: 50%;
-      img{
-        border-radius: 20px;
-        margin-right: 10%;
-      }
-    }
-    .name{
-      margin: auto;
-      color: white;
-      width: 50%;
-      text-transform: capitalize;
-      margin-left: 15%;
-    }
-}
-  }
+
   .choice-profil{
     display: flex;
     justify-content: space-evenly;
