@@ -12,18 +12,24 @@
   .profil{
     display: flex;
     justify-content: space-between;
-
-    .name{
-      text-transform: capitalize;
-      margin-left: 15%;
-    }
+    .test{
+      margin: auto;
     .picture{
+      margin: auto;
+      width: 50%;
       img{
         border-radius: 20px;
-        width: 25%;
         margin-right: 10%;
       }
     }
+    .name{
+      margin: auto;
+      color: white;
+      width: 50%;
+      text-transform: capitalize;
+      margin-left: 15%;
+    }
+}
   }
   .choice-profil{
     display: flex;

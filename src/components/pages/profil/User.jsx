@@ -113,43 +113,47 @@ function User() {
         <h1 className="title_user">Informations:</h1>
 
         <div className="profil">
-          <div>
-            <h2 className="name">{profil.name}</h2>
-            <h2 className="name">age</h2>
-            <p className="name">Description</p>
-            <img src="./pen.png" alt="" />
-          </div>
-          <div className="picture">
-            <img src={(profil.avatar != null
-              ? `${profil.avatar}`
-              : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
-              alt='image de profil'></img>
-            {message ? <Message msg={message} /> : null}
-            <form onSubmit={onSubmit}>
-              <div className='custom-file mb-4'>
+
+          <div className="test">
+
+            <div className="picture">
+              <img src={(profil.avatar != null
+                ? `${profil.avatar}`
+                : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
+                alt='image de profil'></img>
+              {message ? <Message msg={message} /> : null}
+              <form onSubmit={onSubmit}>
+
+                <div className='custom-file mb-4'>
+                  <input
+                    type='file'
+                    className='custom-file-input'
+                    id='customFile'
+                    accept="image/x-png,image/gif,image/jpeg"
+                    onChange={onChange}
+                  >
+                  </input>
+                  <label className='custom-file-label' htmlFor='customFile'>
+                  </label>
+                </div>
+
+                <Progress percentage={uploadPercentage} />
+
                 <input
-                  type='file'
-                  className='custom-file-input'
-                  id='customFile'
-                  accept="image/x-png,image/gif,image/jpeg"
-                  onChange={onChange}
-                >
-
-
-                </input>
-                <label className='custom-file-label' htmlFor='customFile'>
-                </label>
-              </div>
-
-              <Progress percentage={uploadPercentage} />
-
-              <input
-                type='submit'
-                value='Upload'
-                className='btn btn-primary btn-block mt-4'
-              />
-            </form>
+                  type='submit'
+                  value='Upload'
+                  className='btn btn-primary btn-block mt-4'
+                />
+              </form>
+            </div>
+            <div>
+              <h2 className="name">{profil.name}</h2>
+              <h2 className="name">age</h2>
+              <p className="name">Description</p>
+              <img src="./pen.png" alt="" />
+            </div>
           </div>
+
         </div>
 
       </div>
