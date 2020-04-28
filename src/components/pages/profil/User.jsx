@@ -48,8 +48,6 @@ function User() {
     axios.get(`${apiSite}/profil/2`, {
       // headers: { Authorization: `Bearer ${token}` }
     }).then(({ data }) => {
-      console.log(data, "data-----------------");
-
       dispatch({ type: "DATA_LAST_TRIP", data: data.countries.filter(data => data.check === 1) });
       dispatch({ type: "DATA_NEXT_TRIP", data: data.countries.filter(data => data.check === 0) })
     });
