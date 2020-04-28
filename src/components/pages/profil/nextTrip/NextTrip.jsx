@@ -19,7 +19,25 @@ function NextTrip() {
     "Novembre",
     "Décembre"
   ]
+  function compteur(country) {
+    const dateConverter = Date.parse(`01 ${country.periode_month} ${country.year}`);
+    const compte = parseInt((Date.now() - dateConverter));
+    let compteur = 0
+    let unite = ""
+    if (compte > 31536000000) {
+      compteur = parseInt(compte / 31536000000)
+      unite = "ans"
+    }
+    else if (compte > 2628000000) {
+      compteur = parseInt(compte / 2628000000)
+      unite = "mois"
+    } else if (compte > 86400000) {
+      compteur = parseInt(compte / 86400000)
+      unite = "jours"
+    }
 
+    return (`${compteur} ${unite}`)
+  }
   return (
     <div>
       {toNext.map((country, i) => {
@@ -34,12 +52,15 @@ function NextTrip() {
                 <img src={country.pays_flag} alt="flag of country" />
                 <div>
                   <h1 className="country_name">{country.pays_name}</h1>
-                  <h2 className="compte">Dans 1 mois</h2>
+
+                  <h2 className="compte">Dans {compteur(country)}</h2>
+
                 </div>
               </div>
             </div>
           )
         }
+
       })}
 
       {toPassed.map((countryLast, i) => {
@@ -49,7 +70,7 @@ function NextTrip() {
               <div className="pays">
                 <div>
                   <h1 className="country_name">{countryLast.pays_name}</h1>
-                  <h2 className="compte">Il y a  1 mois</h2>
+                  <h2 className="compte">Il y a  {compteur(countryLast)}</h2>
                 </div>
                 <img src={countryLast.pays_flag} alt="flag of country" />
               </div>
@@ -60,6 +81,7 @@ function NextTrip() {
             </div>
           )
         }
+
       })}
     </div>
   )
