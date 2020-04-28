@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
+import Infos from "./info/Infos";
+import Nav from "./nav/Nav";
+import NextTrip from "./nextTrip/NextTrip"
 import "./user.scss"
 // import Data from '/data/data.json'
 import {
@@ -9,7 +12,6 @@ import {
   Geography,
   ZoomableGroup
 } from "react-simple-maps";
-import Infos from "./info/Infos"
 
 
 const { apiSite } = require("../../../conf")
@@ -46,13 +48,8 @@ function User() {
     axios.get(`${apiSite}/profil/2`, {
       // headers: { Authorization: `Bearer ${token}` }
     }).then(({ data }) => {
-      dispatch({ type: "DATA_LAST_TRIP", data: data.countries });
-    });
-
-    axios.get(`${apiSite}/profil/users/2/nextTrip`, {
-      // headers: { Authorization: `Bearer ${token}` }
-    }).then(({ data }) => {
-      dispatch({ type: "DATA_NEXT_TRIP", data: data });
+      dispatch({ type: "DATA_LAST_TRIP", data: data.countries.filter(data => data.check === 1) });
+      dispatch({ type: "DATA_NEXT_TRIP", data: data.countries.filter(data => data.check === 0) })
     });
 
   }, [dispatch]);
@@ -66,14 +63,10 @@ function User() {
   return (
 
     <div className="container_profil">
-      <Infos></Infos>
+      <Infos />
+      <Nav />
 
-      <h1 className="title_user">Voyages: </h1>
-
-      <div className="choice-profil">
-        <h2 onClick={() => { setChoice('map') }} className={`map${choice === "map" ? ' selected' : ""}`}>Map</h2>
-        <h2 onClick={() => { setChoice('liste') }} className={`liste${choice === "liste" ? ' selected' : ""}`}>Liste</h2>
-      </div>
+      <NextTrip />
 
       <div className="legend"></div>
       {
