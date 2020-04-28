@@ -76,8 +76,8 @@ function User() {
           <div className="mapworld">
 
             <div>
-              <h3 onClick={() => { setCheck('fait') }} className="legend check">Fait</h3>
               <h3 onClick={() => { setCheck('aFaire') }} className="legend new">A faire</h3>
+              <h3 onClick={() => { setCheck('fait') }} className="legend check">Fait</h3>
             </div>
 
             <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
@@ -94,11 +94,11 @@ function User() {
                         }}
                         style={{
                           default: {
-                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "#ffa41b" : "#4cd3c2") : "#D6D6DA",
+                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "rgba(39,73,109,1)" : "#4cd3c2") : "#D6D6DA",
                             outline: "none"
                           },
                           hover: {
-                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "#ffa41b" : "#4cd3c2") : "#D6D6DA",
+                            fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "rgba(39,73,109,1)" : "#4cd3c2") : "#D6D6DA",
                             outline: "none"
                           }
 
