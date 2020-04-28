@@ -9,20 +9,14 @@ import {
   Geography,
   ZoomableGroup
 } from "react-simple-maps";
-import Message from './Message';
-import Progress from './Progress';
+import Infos from "./info/Infos"
+
 
 const { apiSite } = require("../../../conf")
 
 function User() {
-  const [profil, setProfil] = useState([]);
   const [choice, setChoice] = useState('map');
   const [check, setCheck] = useState('fait');
-  const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('Choose File');
-  const [uploadedFile, setUploadedFile] = useState({});
-  const [message, setMessage] = useState('');
-  const [uploadPercentage, setUploadPercentage] = useState(0);
   const toPassed = useSelector(state => state.LastTrip);
   const toNext = useSelector(state => state.NextTrip);
   const user = useSelector(state => state.user);
@@ -52,7 +46,6 @@ function User() {
     axios.get(`${apiSite}/profil/2`, {
       // headers: { Authorization: `Bearer ${token}` }
     }).then(({ data }) => {
-      setProfil(data);
       dispatch({ type: "DATA_LAST_TRIP", data: data.countries });
     });
 
@@ -62,97 +55,19 @@ function User() {
       dispatch({ type: "DATA_NEXT_TRIP", data: data });
     });
 
-  }, [profil, dispatch]);
+  }, [dispatch]);
 
   const codeVisited = toPassed.map((c) => { return c.code })
   const codeToVisit = toNext.map((c) => { return c.code })
 
 
-  const onChange = e => {
-    setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
-  };
 
-  const onSubmit = async e => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const res = await axios.post('http://localhost:5000/profil/2/avatar', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-
-          // Clear percentage
-          setTimeout(() => setUploadPercentage(0), 10000);
-        }
-      });
-
-      const { fileName, filePath } = res.data;
-
-      setUploadedFile({ fileName, filePath });
-
-      setMessage('File Uploaded');
-    } catch (err) {
-
-    }
-  };
 
   return (
 
     <div className="container_profil">
+      <Infos></Infos>
 
-      <div>
-        <h1 className="title_user">Informations:</h1>
-
-        <div className="profil">
-          <div>
-            <h2 className="name">{profil.name}</h2>
-            <h2 className="name">age</h2>
-            <p className="name">Description</p>
-            <img src="./pen.png" alt="" />
-          </div>
-          <div className="picture">
-            <img src={(profil.avatar != null
-              ? `${profil.avatar}`
-              : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
-              alt='image de profil'></img>
-            {message ? <Message msg={message} /> : null}
-            <form onSubmit={onSubmit}>
-              <div className='custom-file mb-4'>
-                <input
-                  type='file'
-                  className='custom-file-input'
-                  id='customFile'
-                  accept="image/x-png,image/gif,image/jpeg"
-                  onChange={onChange}
-                >
-
-
-                </input>
-                <label className='custom-file-label' htmlFor='customFile'>
-                </label>
-              </div>
-
-              <Progress percentage={uploadPercentage} />
-
-              <input
-                type='submit'
-                value='Upload'
-                className='btn btn-primary btn-block mt-4'
-              />
-            </form>
-          </div>
-        </div>
-
-      </div>
       <h1 className="title_user">Voyages: </h1>
 
       <div className="choice-profil">
