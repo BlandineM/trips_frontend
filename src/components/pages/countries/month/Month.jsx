@@ -28,13 +28,13 @@ function Month() {
   };
 
   useEffect(() => {
-    axios.get(`${apiSite}/type/${type}/periode/${month}/advised/advised`).then(({ data }) => {
+    axios.get(`${apiSite}/type/${type}/period/${month}/advised/advised`).then(({ data }) => {
       setfilterG(data);
     });
-    axios.get(`${apiSite}/type/${type}/periode/${month}/advised/wrong`).then(({ data }) => {
+    axios.get(`${apiSite}/type/${type}/period/${month}/advised/wrong`).then(({ data }) => {
       setfilterB(data);
     });
-    axios.get(`${apiSite}/countries/tripper/periode/${month}`).then(({ data }) => {
+    axios.get(`${apiSite}/countries/tripper/period/${month}`).then(({ data }) => {
       setTripper(data)
     })
   }, [setfilterG, setfilterB, month, type]);
@@ -56,7 +56,7 @@ function Month() {
           <h2>En {mois[month]} tu peux visiter</h2>
 
           <div className="destinationsG">
-            {filterG.map((pays, i) => {
+            {filterG.map((country, i) => {
               return (
 
                 <div key={i} className="cards">
@@ -66,22 +66,22 @@ function Month() {
                     <div className="info_countries">
                       {trippers.map((tripper) => {
                         return (
-                          ((pays.id_pays === tripper.id_pays)
+                          ((country.id_country === tripper.id_country)
                             ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
                             : ("")))
                       })}
-                      <h2>{pays.nameFr != null
-                        ? pays.nameFr
-                        : pays.name}</h2>
-                      <img className="info_pays" src={`${pays.flag}`}></img>
+                      <h2>{country.nameFr != null
+                        ? country.nameFr
+                        : country.name}</h2>
+                      <img className="info_country" src={`${country.flag}`}></img>
                     </div>
 
                     <img
                       className="destinationPicture"
-                      src={pays.pictures != null
-                        ? `${pays.pictures}`
-                        : `${pays.flag}`}
-                      alt={`${pays.name}`}
+                      src={country.pictures != null
+                        ? `${country.pictures}`
+                        : `${country.flag}`}
+                      alt={`${country.name}`}
                     ></img>
                   </div>
 
@@ -102,7 +102,7 @@ function Month() {
           <h2>Déconseillé en {mois[month]}</h2>
 
           <div className="destinationsB">
-            {filterB.map((pays, i) => {
+            {filterB.map((country, i) => {
               return (
 
                 <div key={i} className="cards">
@@ -112,22 +112,22 @@ function Month() {
                     <div className="info_countries">
                       {trippers.map((tripper) => {
                         return (
-                          ((pays.id_pays === tripper.id_pays)
+                          ((country.id_country === tripper.id_country)
                             ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
                             : ("")))
                       })}
-                      <h2>{pays.nameFr != null
-                        ? pays.nameFr
-                        : pays.name}</h2>
-                      <img className="info_pays" src={`${pays.flag}`}></img>
+                      <h2>{country.nameFr != null
+                        ? country.nameFr
+                        : country.name}</h2>
+                      <img className="info_country" src={`${country.flag}`}></img>
                     </div>
 
                     <img
                       className="destinationPicture"
-                      src={pays.pictures != null
-                        ? `${pays.pictures}`
-                        : `${pays.flag}`}
-                      alt={`${pays.name}`}
+                      src={country.pictures != null
+                        ? `${country.pictures}`
+                        : `${country.flag}`}
+                      alt={`${country.name}`}
                     ></img>
                   </div>
 

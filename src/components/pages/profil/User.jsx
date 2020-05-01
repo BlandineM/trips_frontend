@@ -45,20 +45,17 @@ function User() {
 
 
   useEffect(() => {
-    axios.get(`${apiSite}/profil/2`, {
-      // headers: { Authorization: `Bearer ${token}` }
+    axios.get(`${apiSite}/profil/${user.id}/countries`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(({ data }) => {
-      dispatch({ type: "DATA_LAST_TRIP", data: data.countries.filter(data => data.check === 1) });
-      dispatch({ type: "DATA_NEXT_TRIP", data: data.countries.filter(data => data.check === 0) })
+      dispatch({ type: "DATA_LAST_TRIP", data: data.filter(data => data.check === 1) });
+      dispatch({ type: "DATA_NEXT_TRIP", data: data.filter(data => data.check === 0) })
     });
 
-  }, [dispatch]);
+  }, [dispatch, user.id]);
 
   const codeVisited = toPassed.map((c) => { return c.code })
   const codeToVisit = toNext.map((c) => { return c.code })
-
-
-
 
   return (
 
