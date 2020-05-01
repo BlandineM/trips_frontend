@@ -19,9 +19,6 @@ function User() {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-
-
-
   useEffect(() => {
     axios.get(`${apiSite}/profil/${user.id}/countries`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
