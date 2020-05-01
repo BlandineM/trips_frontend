@@ -38,7 +38,6 @@ function NextTrip() {
 
     return (`${compteur} ${unite}`)
   }
-  console.log(toNext);
 
   return (
     <div>
