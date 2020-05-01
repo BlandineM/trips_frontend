@@ -15,12 +15,12 @@ function Infos() {
   const token = useSelector(state => state.user.token);
 
   useEffect(() => {
-    axios.get(`${apiSite}/profil/2`, {
-      // headers: { Authorization: `Bearer ${token}` }
+    axios.get(`${apiSite}/profil/${user.id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(({ data }) => {
       setProfil(data);
     });
-  }, [])
+  }, [token, user.id])
 
   const onChange = e => {
     return new Promise((resolve) => {
@@ -32,8 +32,9 @@ function Infos() {
       .then((file) => {
         const formData = new FormData();
         formData.append('file', file);
-        return axios.post('http://localhost:5000/profil/2/avatar', formData, {
+        return axios.post(`${apiSite}/profil/${user.id}/avatar`, formData, {
           headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'multipart/form-data'
           },
         });

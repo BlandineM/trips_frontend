@@ -26,6 +26,8 @@ function Sign() {
         .then(({ data }) => {
           history.push("/profil");
           dispatch({ type: "FETCHING_USER_DATA", value: data });
+          localStorage.setItem('token', data.token)
+
         })
         .catch(err => {
           if (err) return history.push("/connexion"), setError(true);
