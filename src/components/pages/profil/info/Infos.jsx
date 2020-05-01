@@ -11,6 +11,8 @@ function Infos() {
   const [filename, setFilename] = useState('Choose File');
   const [preview, setPreview] = useState('')
   const toPassed = useSelector(state => state.LastTrip);
+  const user = useSelector(state => state.user);
+  const token = useSelector(state => state.user.token);
 
   useEffect(() => {
     axios.get(`${apiSite}/profil/2`, {
@@ -40,38 +42,44 @@ function Infos() {
 
   return (
     <div>
+      {profil.map((user, i) => {
+        if (i === 0) {
+          return (
 
-      <div className="profil">
+            <div className="profil">
 
-        <div className="picture">
-          <form>
-            <label className='custom-file-label' htmlFor='customFile'>
-              {preview ? <img src={preview} />
-                : (<img src={(profil.avatar != null
-                  ? `${profil.avatar}`
-                  : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
-                  alt='image de profil'></img>
-                )}
-            </label>
-            <input
-              style={{ display: 'none' }}
-              type='file'
-              className='custom-file-input'
-              id='customFile'
-              accept="image/x-png,image/gif,image/jpeg"
-              onChange={onChange}
-            >
-            </input>
-          </form>
-        </div>
+              <div className="picture">
+                <form>
+                  <label className='custom-file-label' htmlFor='customFile'>
+                    {preview ? <img src={preview} />
+                      : (<img src={(user.avatar != null
+                        ? `${user.avatar}`
+                        : 'https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
+                        alt='image de profil'></img>
+                      )}
+                  </label>
+                  <input
+                    style={{ display: 'none' }}
+                    type='file'
+                    className='custom-file-input'
+                    id='customFile'
+                    accept="image/x-png,image/gif,image/jpeg"
+                    onChange={onChange}
+                  >
+                  </input>
+                </form>
+              </div>
 
-        <div>
-          <h2 className="name">{profil.name}</h2>
-          <h2 className="countries">{toPassed.length} pays visité{toPassed.length > 1 ? "s" : ""}</h2>
-        </div>
+              <div>
+                <h2 className="name">{user.user_name}</h2>
+                <h2 className="countries">{toPassed.length} pays visité{toPassed.length > 1 ? "s" : ""}</h2>
+              </div>
 
 
-      </div>
+            </div>
+          )
+        }
+      })}
 
     </div>
 

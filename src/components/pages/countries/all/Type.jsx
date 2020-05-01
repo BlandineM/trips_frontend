@@ -7,20 +7,20 @@ import { useParams } from "react-router-dom";
 const { apiSite } = require("../../../../conf")
 
 function Type() {
-  const [pays, setpays] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [trippers, setTripper] = useState([]);
   const { type } = useParams();
 
   useEffect(() => {
     axios.get(`${apiSite}/type/${type}/countries`).then(({ data }) => {
-      setpays(data);
+      setCountries(data);
     });
     axios.get(`${apiSite}/countries/tripper`).then(({ data }) => {
       setTripper(data)
     })
-  }, [setpays, type]);
+  }, [setCountries, type]);
 
-  console.log("tripper", trippers);
+
 
   return (
     <div className="main">
@@ -29,7 +29,7 @@ function Type() {
       <NavBar place={type} />
 
       <div className="destinations">
-        {pays.map((pays, i) => {
+        {countries.map((country, i) => {
           return (
             <div key={i} className="cards">
 
@@ -38,22 +38,22 @@ function Type() {
                 <div className="info_countries">
                   {trippers.map((tripper) => {
                     return (
-                      ((pays.id_pays === tripper.id_pays)
+                      ((country.id_country === tripper.id_countries)
                         ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici</h2>)
                         : ("")))
                   })}
-                  <h2>{pays.nameFr != null
-                    ? pays.nameFr
-                    : pays.name}</h2>
-                  <img className="info_pays" src={`${pays.flag}`}></img>
+                  <h2>{country.nameFr != null
+                    ? country.nameFr
+                    : country.name}</h2>
+                  <img className="info_country" src={`${country.flag}`}></img>
                 </div>
 
                 <img
                   className="destinationPicture"
-                  src={pays.pictures != null
-                    ? `${pays.pictures}`
-                    : `${pays.flag}`}
-                  alt={`${pays.name}`}
+                  src={country.pictures != null
+                    ? `${country.pictures}`
+                    : `${country.flag}`}
+                  alt={`${country.name}`}
                 ></img>
               </div>
 
