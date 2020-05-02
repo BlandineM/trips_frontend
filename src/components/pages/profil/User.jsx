@@ -5,7 +5,7 @@ import Infos from "./info/Infos";
 import "./nav.scss";
 import NextTrip from "./nextTrip/NextTrip";
 import Map from "./map/Map"
-import List from "./list/List"
+import TripList from "./list/TripList"
 import "./user.scss"
 // import Data from '/data/data.json'
 
@@ -26,13 +26,11 @@ function User() {
       dispatch({ type: "DATA_LAST_TRIP", data: data.filter(data => data.check === 1) });
       dispatch({ type: "DATA_NEXT_TRIP", data: data.filter(data => data.check === 0) })
     });
-
   }, [dispatch, user.id]);
 
 
 
   return (
-
     <div className="container_profil">
       <Infos />
       <div className="choice-profil">
@@ -54,13 +52,8 @@ function User() {
             </div>
             <Map statut={check} />
           </div>
-
-
           :
-          <List statut={check} />
-
-
-
+          <TripList statut={check} />
       }
       <h1 className="title_user">Ajoute un voyage </h1>
     </div >
