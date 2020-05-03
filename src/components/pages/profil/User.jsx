@@ -3,13 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import Infos from "./info/Infos";
 import "./nav.scss";
-import NextTrip from "./nextTrip/NextTrip";
+import LastNextTrip from "./last-nextTrip/LastNextTrip";
 import Map from "./map/Map"
-import TripList from "./nextTrip/list/TripList"
 import "./user.scss"
 // import Data from '/data/data.json'
-
-
 
 const { apiSite } = require("../../../conf")
 
@@ -29,7 +26,6 @@ function User() {
   }, [dispatch, user.id]);
 
 
-
   return (
     <div className="container_profil">
       <Infos />
@@ -38,7 +34,7 @@ function User() {
         <h2 onClick={() => { setChoice('liste') }} className={`liste${choice === "liste" ? ' selected' : ""}`}>Liste</h2>
       </div>
 
-      <NextTrip />
+      <LastNextTrip />
 
       <div className="legend"></div>
       {
@@ -53,7 +49,7 @@ function User() {
             <Map statut={check} />
           </div>
           :
-          <TripList statut={check} />
+          ""
       }
       <h1 className="title_user">Ajoute un voyage </h1>
     </div >
