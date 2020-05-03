@@ -1,0 +1,49 @@
+ .list_countries{
+   width: 80%;
+   margin: auto;
+   .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: auto;
+    width: 100%;
+    margin: auto;
+   }
+    .titre{
+      margin: 1% 2%;
+      color: white;
+    }
+    .list_entete{ 
+      display: none;
+    }
+    .visible{
+      display: flex;
+      flex-direction: column;
+      border-spacing: 10px;
+      width: 25%;
+      box-shadow: 10px 5px 5px #f7bc6f;
+      margin: 25px 10px;
+      img{
+        display: inline;
+        opacity: 80%;
+      }
+      img:hover{
+      opacity: 100%;
+      }
+    }
+    .info{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .country{
+        margin:0% 2%;
+
+      }
+      .period{
+
+      }
+    }
+    .list_corps{
+      text-align: center;
+    }
+  }

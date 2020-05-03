@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import "./nextTrip.scss"
+import "./lastNextTrip.scss"
+import TripList from './list/TripList';
 
-function NextTrip() {
+function LastNextTrip() {
+  const [check, setCheck] = useState('aFaire');
   const toNext = useSelector(state => state.NextTrip);
   const toPassed = useSelector(state => state.LastTrip);
   const mois = [
@@ -20,8 +22,11 @@ function NextTrip() {
     "Décembre"
   ]
   function compteur(country) {
-    const dateConverter = Date.parse(`01 ${country.month} ${country.year}`);
-    const compte = parseInt((Date.now() - dateConverter));
+    const dateConverter = Date.parse(` ${country.month + 1} 01 ${country.year} 00:00:00 GMT`);
+    let compte = parseInt((dateConverter - Date.now()));
+    if (compte < 0) {
+      compte = compte / -1
+    }
     let compteur = 0
     let unite = ""
     if (compte > 31536000000) {
@@ -35,7 +40,6 @@ function NextTrip() {
       compteur = parseInt(compte / 86400000)
       unite = "jours"
     }
-
     return (`${compteur} ${unite}`)
   }
 
@@ -44,7 +48,7 @@ function NextTrip() {
       {toNext.map((country, i) => {
         if (i === 0) {
           return (
-            <div className="nextTrip">
+            <div className="nextTrip" onClick={() => { setCheck('aFaire') }}>
               <div className="date">
                 <h1>{mois[country.month]}</h1>
                 {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
@@ -61,13 +65,16 @@ function NextTrip() {
             </div>
           )
         }
-
       })}
+      {check === 'aFaire'
+        ? <TripList check={check} />
+        : ""}
+
 
       {toPassed.map((countryLast, i) => {
         if (i === 0) {
           return (
-            <div className="lastTrip">
+            <div className="lastTrip" onClick={() => { setCheck('fait') }}>
               <div className="pays">
                 <div>
                   <h1 className="country_name">{countryLast.country_name}</h1>
@@ -84,8 +91,11 @@ function NextTrip() {
         }
 
       })}
+      {check === 'fait'
+        ? <TripList check={check} />
+        : ""}
     </div>
   )
 
 }
-export default NextTrip;
+export default LastNextTrip;
