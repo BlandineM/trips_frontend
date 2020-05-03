@@ -3,14 +3,17 @@ import { useSelector } from "react-redux";
 import TripCard from "./TripCard";
 import "./tripList.scss"
 
-function TripList() {
-  const [check, setCheck] = useState('fait');
+function TripList(props) {
+  const check = props.check
   const toPassed = useSelector(state => state.LastTrip);
   const toNext = useSelector(state => state.NextTrip);
+
+  console.log(props);
+
   return (
     <div className="list_countries">
-      <h2 onClick={() => { setCheck('fait') }} className={`check titre `}>Fait</h2>
-      <h2 onClick={() => { setCheck('aFaire') }} className={`new titre`}>A faire</h2>
+      {/* <h2 onClick={() => { setCheck('fait') }} className={`check titre `}>Fait</h2>
+      <h2 onClick={() => { setCheck('aFaire') }} className={`new titre`}>A faire</h2> */}
       <div className="container">
         {check === 'fait'
           ?

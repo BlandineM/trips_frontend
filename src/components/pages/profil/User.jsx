@@ -5,7 +5,7 @@ import Infos from "./info/Infos";
 import "./nav.scss";
 import NextTrip from "./nextTrip/NextTrip";
 import Map from "./map/Map"
-import TripList from "./list/TripList"
+import TripList from "./nextTrip/list/TripList"
 import "./user.scss"
 // import Data from '/data/data.json'
 
