@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import "./nextTrip.scss"
+import "./lastNextTrip.scss"
 import TripList from './list/TripList';
 
-function NextTrip() {
-  const [check, setCheck] = useState('fait');
+function LastNextTrip() {
+  const [check, setCheck] = useState('aFaire');
   const toNext = useSelector(state => state.NextTrip);
   const toPassed = useSelector(state => state.LastTrip);
   const mois = [
@@ -48,7 +48,7 @@ function NextTrip() {
       {toNext.map((country, i) => {
         if (i === 0) {
           return (
-            <div className="nextTrip" onClick={() => { setCheck('fait') }}>
+            <div className="nextTrip" onClick={() => { setCheck('aFaire') }}>
               <div className="date">
                 <h1>{mois[country.month]}</h1>
                 {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
@@ -66,7 +66,7 @@ function NextTrip() {
           )
         }
       })}
-      {check === 'fait'
+      {check === 'aFaire'
         ? <TripList check={check} />
         : ""}
 
@@ -74,7 +74,7 @@ function NextTrip() {
       {toPassed.map((countryLast, i) => {
         if (i === 0) {
           return (
-            <div className="lastTrip" onClick={() => { setCheck('aFaire') }}>
+            <div className="lastTrip" onClick={() => { setCheck('fait') }}>
               <div className="pays">
                 <div>
                   <h1 className="country_name">{countryLast.country_name}</h1>
@@ -91,11 +91,11 @@ function NextTrip() {
         }
 
       })}
-      {check === 'aFaire'
+      {check === 'fait'
         ? <TripList check={check} />
         : ""}
     </div>
   )
 
 }
-export default NextTrip;
+export default LastNextTrip;
