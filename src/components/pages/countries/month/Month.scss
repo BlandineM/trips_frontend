@@ -44,10 +44,6 @@
         text-align: center;
         visibility: hidden;
       }
-
-      .destinationPicture {
-        height: 30vh;
-      }
     }
     .cards:hover {
       h2 {
@@ -56,9 +52,6 @@
       }
       .image {
         opacity: 1;
-      }
-      .destinationPicture {
-        box-shadow: 8px 8px 8px white;
       }
     }
   }
