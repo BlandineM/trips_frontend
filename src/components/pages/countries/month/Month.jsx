@@ -4,12 +4,14 @@ import NavBar from "../../../NavBar";
 import "./Month.scss";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import MonthCard from './MonthCard';
 
 const { apiSite } = require("../../../../conf");
 
 function Month() {
   const [filterG, setfilterG] = useState([]);
   const [filterB, setfilterB] = useState([]);
+  const [weather, setWeather] = useState([])
   const [trippers, setTripper] = useState([]);
   const { month, type } = useParams();
   const mois = {
@@ -36,9 +38,11 @@ function Month() {
     });
     axios.get(`${apiSite}/countries/tripper/period/${month}`).then(({ data }) => {
       setTripper(data)
+    });
+    axios.get(`${apiSite}/countries/weather/period/${month}`).then(({ data }) => {
+      setWeather(data)
     })
   }, [setfilterG, setfilterB, month, type]);
-
 
   return (
     <div className="main">
@@ -57,36 +61,7 @@ function Month() {
 
           <div className="destinationsG">
             {filterG.map((country, i) => {
-              return (
-
-                <div key={i} className="cards">
-
-                  <div className="image">
-
-                    <div className="info_countries">
-                      {trippers.map((tripper) => {
-                        return (
-                          ((country.id_country === tripper.id_country)
-                            ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
-                            : ("")))
-                      })}
-                      <h2>{country.nameFr != null
-                        ? country.nameFr
-                        : country.name}</h2>
-                      <img className="info_country" src={`${country.flag}`}></img>
-                    </div>
-
-                    <img
-                      className="destinationPicture"
-                      src={country.pictures != null
-                        ? `${country.pictures}`
-                        : `${country.flag}`}
-                      alt={`${country.name}`}
-                    ></img>
-                  </div>
-
-                </div>
-              );
+              return (<div key={i} className="cards"><MonthCard country={country} key={i} /></div>);
             })}
           </div>
         </div>
@@ -103,37 +78,7 @@ function Month() {
 
           <div className="destinationsB">
             {filterB.map((country, i) => {
-              return (
-
-                <div key={i} className="cards">
-
-                  <div className="image">
-
-                    <div className="info_countries">
-                      {trippers.map((tripper) => {
-                        return (
-                          ((country.id_country === tripper.id_country)
-                            ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
-                            : ("")))
-                      })}
-                      <h2>{country.nameFr != null
-                        ? country.nameFr
-                        : country.name}</h2>
-                      <img className="info_country" src={`${country.flag}`}></img>
-                    </div>
-
-                    <img
-                      className="destinationPicture"
-                      src={country.pictures != null
-                        ? `${country.pictures}`
-                        : `${country.flag}`}
-                      alt={`${country.name}`}
-                    ></img>
-                  </div>
-
-                </div>
-
-              );
+              return (<div key={i} className="cards"><MonthCard country={country} key={i} /></div>);
             })}
           </div>
 
