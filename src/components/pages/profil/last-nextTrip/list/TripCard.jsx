@@ -15,8 +15,9 @@ function TripCard(props) {
     "Novembre",
     "Décembre"
   ]
+
   return (
-    <div>
+    <div className="item">
       <img src={props.country.pictures ? props.country.pictures : props.country.flag} alt={props.country.country_name} />
       <div className="info">
         <h1 className="country">{props.country.country_name}</h1>
