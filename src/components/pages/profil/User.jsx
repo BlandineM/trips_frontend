@@ -6,6 +6,7 @@ import "./nav.scss";
 import LastNextTrip from "./last-nextTrip/LastNextTrip";
 import Map from "./map/Map"
 import "./user.scss"
+import Suggestion from './suggestion/Suggestion';
 // import Data from '/data/data.json'
 
 const { apiSite } = require("../../../conf")
@@ -33,7 +34,7 @@ function User() {
         <h2 onClick={() => { setChoice('map') }} className={`map${choice === "map" ? ' selected' : ""}`}>Map</h2>
         <h2 onClick={() => { setChoice('liste') }} className={`liste${choice === "liste" ? ' selected' : ""}`}>Liste</h2>
       </div>
-
+      <Suggestion />
       <LastNextTrip />
 
       <div className="legend"></div>
