@@ -27,8 +27,6 @@ export default function Suggestion() {
     axios.get(`${apiSite}/suggestion/2`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(({ data }) => {
-      console.log(data);
-
       setSugges(data)
     })
   }, [user.id])
