@@ -8,8 +8,6 @@
     margin: auto;
     width: 100%;
     margin: auto;
-
-
   .wrapper {
     display: grid;
     // display: inline-flex;
@@ -17,7 +15,6 @@
     overflow:hidden;
     scroll-behavior: smooth;
     width: 100%;
-
     section {
       width: 100%;
       position: relative;
@@ -27,13 +24,6 @@
       
       .item {
         padding: 0 2px;
-        // transition: duration all;
-        
-        // &:hover { 
-        //   margin: 0 40px;
-        //   transform: scale(1.1);
-        // }
-        
       }
       
       a {
@@ -41,7 +31,6 @@
         color: #faa430;
         text-decoration: none;
         font-size: 6em;
-        // background:rgb(0,0,0);
         width: 80px;
         padding: 20px;
         text-align: center;
@@ -74,14 +63,15 @@
     }
     .list_entete{ 
       display: none;
+      transition: 1s;
     }
     .visible{
       display: flex;
       flex-direction: column;
       border-spacing: 10px;
-      // width: 50%;
-      // box-shadow: 10px 5px 5px #f7bc6f;
+      width: 80%;
       margin: 25px 35px;
+      transition: 1s;
         &:hover { 
           margin: 10px 50px;
           transform: scale(1.1);
@@ -99,10 +89,10 @@
     .info{
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
+      width: 100%;
       .country{
         margin:0% 2%;
-
       }
     }
     .list_corps{
