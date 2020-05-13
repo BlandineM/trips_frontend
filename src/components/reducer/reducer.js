@@ -20,6 +20,8 @@ const reducer = (state = initialState, action) => {
         ...newState,
         user: {
           id: data.user.id,
+          name: data.user.name,
+          avatar: data.user.avatar,
           login: data.user.login,
           token: data.token,
         }
