@@ -15,9 +15,9 @@
     ul{
       display: flex;
       flex-direction: row;
+      justify-content: space-around;
       a{
         color:#faa430;
-        width: 100%;
         text-align: end;
         font-size: 1.5em;
         li{
@@ -25,6 +25,13 @@
           margin: 1% 5%;
         
         }
+      }
+      li{
+        list-style:none;
+        font-size: 1.3em;
+      }
+      .destinations{
+        margin-top: 4%;
       }
     }
   }

@@ -29,13 +29,14 @@ export default function Header() {
       <style>
         @import url('https://fonts.googleapis.com/css?family=Lora:400,500,600,700&display=swap');
 </style>
-      <div className="logo">
-        <a href="/">
-          <img src="https://res.cloudinary.com/blandine/image/upload/v1586076479/harley_trip_rogner.png"></img>
-        </a>
-      </div>
       <div className="nav">
         <ul>
+          <li className="destinations">Destinations</li>
+          <li>
+            <a href="/">
+              <img src="https://res.cloudinary.com/blandine/image/upload/v1586076479/harley_trip_rogner.png"></img>
+            </a>
+          </li>
           {isLogin()
             ? <Link to="/profil">
               <li>{user.avatar}</li>
