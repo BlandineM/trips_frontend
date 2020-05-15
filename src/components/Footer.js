@@ -7,6 +7,11 @@ export default function Footer() {
       <a href="https://github.com/BlandineM" target="_blank">
         <img src="/ping.png"></img>
       </a>
+      <ul>
+        <li>
+          A propos de nous
+        </li>
+      </ul>
     </div>
   );
 }

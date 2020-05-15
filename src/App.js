@@ -24,9 +24,7 @@ function App() {
         <Route path="/new" component={NewTrip} />
         <Route path="/:type" component={Type} />
       </Switch>
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }
