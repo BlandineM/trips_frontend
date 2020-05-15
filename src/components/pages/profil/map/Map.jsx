@@ -6,6 +6,7 @@ import {
   Geography,
   ZoomableGroup
 } from "react-simple-maps";
+import "./map.scss"
 
 function Map(props) {
   const check = props.statut;
@@ -15,9 +16,10 @@ function Map(props) {
   const toNext = useSelector(state => state.NextTrip);
   const codeVisited = toPassed.map((c) => { return c.coded })
   const codeToVisit = toNext.map((c) => { return c.coded })
+  const [test, setTest] = useState('')
 
   return (
-    <div>
+    <div className="mapProfil">
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
         <ZoomableGroup>
           <Geographies geography={geoUrl}>
@@ -26,9 +28,10 @@ function Map(props) {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-
                   onMouseEnter={() => {
                     console.log(geo.properties.ISO_A3);
+                    const { NAME } = geo.properties;
+                    setTest(`${NAME} — `);
                   }}
                   style={{
                     default: {
