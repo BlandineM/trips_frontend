@@ -3,7 +3,6 @@ import Homepage from "./components/pages/homepage/Homepage";
 import Footer from "./components/Footer";
 import Type from "./components/pages/countries/all/Type";
 import Month from "./components/pages/countries/month/Month";
-import AddTrip from "./components/pages/new-trip/AddTrip";
 import Header from "./components/Header";
 import Sign from './components/pages/auth/Sign';
 import NewTrip from "./components/pages/profil/NewTrip"
@@ -18,7 +17,6 @@ function App() {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/:type/:month" component={Month} />
-        <Route path="/newtrip" component={AddTrip} />
         <Route path="/connexion" component={Sign} />
         <Route path="/profil" component={User} />
         <Route path="/new" component={NewTrip} />
