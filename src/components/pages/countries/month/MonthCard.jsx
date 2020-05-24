@@ -41,10 +41,10 @@ function MonthCard(props) {
           : props.country.name}</h2>
         <img className="info_country" src={`${props.country.flag}`} alt={props.country.name}></img>
 
-        {trippers.map((tripper) => {
+        {trippers.map((tripper, i) => {
           return (
             ((props.country.id_countries === tripper.id_countries)
-              ? (<h2 className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
+              ? (<h2 key={i} className="tripper">{tripper.numOfVisited} {tripper.numOfVisited > 1 ? "personnes ont" : "personne a"} déjà été ici en {mois[month]}</h2>)
               : ("")))
         })}
         {props.tripperAll
@@ -53,10 +53,10 @@ function MonthCard(props) {
         }
 
 
-        {weather.map((temperature) => {
+        {weather.map((temperature, i) => {
           return (
             ((props.country.id_countries === temperature.id_countries)
-              ? (<div>
+              ? (<div key={i}>
                 <img className="thermometer" src="/thermometer.png" alt="termometer" />
                 <h2 className="weather">{temperature.temperature} C°</h2>
                 <img className="rain" src="/rain.png" alt="water" />

@@ -34,7 +34,7 @@ export default function Header() {
           <li className="destinations">Destinations</li>
           <li>
             <a href="/">
-              <img src="https://res.cloudinary.com/blandine/image/upload/v1586076479/harley_trip_rogner.png"></img>
+              <img src="https://res.cloudinary.com/blandine/image/upload/v1586076479/harley_trip_rogner.png" alt="logo"></img>
             </a>
           </li>
           {isLogin()
