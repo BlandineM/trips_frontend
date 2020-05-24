@@ -30,7 +30,7 @@ function Sign() {
 
         })
         .catch(err => {
-          if (err) return history.push("/connexion"), setError(true);
+          if (err) return history.push("/connexion"); setError(true);
         }))
       : (axios
         .post(`${apiSite}/auth/signup`, {
@@ -42,7 +42,7 @@ function Sign() {
         }))
     )
       .catch(err => {
-        if (err) return console.log(err), setError2(true);
+        if (err) return console.log(err); setError2(true);
       })
   };
 
