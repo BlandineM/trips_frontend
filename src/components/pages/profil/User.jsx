@@ -18,7 +18,7 @@ function User() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get(`${apiSite}/profil/${user.id}/countries`, {
+    axios.get(`${apiSite}/me/profil/countries`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(({ data }) => {
       dispatch({ type: "DATA_LAST_TRIP", data: data.filter(data => data.check === 1) });
