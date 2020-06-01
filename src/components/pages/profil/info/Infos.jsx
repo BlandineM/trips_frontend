@@ -13,7 +13,7 @@ function Infos() {
   const token = useSelector(state => state.user.token);
 
   useEffect(() => {
-    axios.get(`${apiSite}/profil/${user.id}`, {
+    axios.get(`${apiSite}/me/profil`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(({ data }) => {
       setProfil(data);

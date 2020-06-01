@@ -13,8 +13,8 @@ function Map(props) {
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
   const toPassed = useSelector(state => state.LastTrip);
   const toNext = useSelector(state => state.NextTrip);
-  const codeVisited = toPassed.map((c) => { return c.coded })
-  const codeToVisit = toNext.map((c) => { return c.coded })
+  const codeVisited = toPassed.map((c) => { return c.code })
+  const codeToVisit = toNext.map((c) => { return c.code })
 
   return (
     <div>
