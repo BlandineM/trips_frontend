@@ -46,25 +46,27 @@ function LastNextTrip() {
   return (
     <div>
       {toNext.map((country, i) => {
-        if (i === 0) {
-          return (
-            <div className="nextTrip" onClick={() => { setCheck('aFaire') }}>
-              <div className="date">
-                <h1>{mois[country.month]}</h1>
-                {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
-              </div>
-              <div className="pays">
-                <img src={country.flag} alt="flag of country" />
-                <div>
-                  <h1 className="country_name">{country.country_name}</h1>
+        return (
+          i === 0
+            ? (
+              <div className="nextTrip" onClick={() => { setCheck('aFaire') }}>
+                <div className="date">
+                  <h1>{mois[country.month]}</h1>
+                  {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
+                </div>
+                <div className="pays">
+                  <img src={country.flag} alt="flag of country" />
+                  <div>
+                    <h1 className="country_name">{country.country_name}</h1>
 
-                  <h2 className="compte">Dans {compteur(country)}</h2>
+                    <h2 className="compte">Dans {compteur(country)}</h2>
 
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        }
+            )
+            : ""
+        )
       })}
       {check === 'aFaire'
         ? <TripList check={check} />
@@ -72,24 +74,25 @@ function LastNextTrip() {
 
 
       {toPassed.map((countryLast, i) => {
-        if (i === 0) {
-          return (
-            <div className="lastTrip" onClick={() => { setCheck('fait') }}>
-              <div className="pays">
-                <div>
-                  <h1 className="country_name">{countryLast.country_name}</h1>
-                  <h2 className="compte">Il y a  {compteur(countryLast)}</h2>
+        return (
+          i === 0
+            ? (
+              <div className="lastTrip" onClick={() => { setCheck('fait') }}>
+                <div className="pays">
+                  <div>
+                    <h1 className="country_name">{countryLast.country_name}</h1>
+                    <h2 className="compte">Il y a  {compteur(countryLast)}</h2>
+                  </div>
+                  <img src={countryLast.flag} alt="flag of country" />
                 </div>
-                <img src={countryLast.flag} alt="flag of country" />
+                <div className="date">
+                  <h1>{mois[countryLast.month]}</h1>
+                  {countryLast.year != null ? (<h1>{countryLast.year}</h1>) : (<h1>Année à définir</h1>)}
+                </div>
               </div>
-              <div className="date">
-                <h1>{mois[countryLast.month]}</h1>
-                {countryLast.year != null ? (<h1>{countryLast.year}</h1>) : (<h1>Année à définir</h1>)}
-              </div>
-            </div>
-          )
-        }
-
+            )
+            : ""
+        )
       })}
       {check === 'fait'
         ? <TripList check={check} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import {
   ComposableMap,
@@ -17,6 +17,7 @@ function Map(props) {
   const codeVisited = toPassed.map((c) => { return c.code })
   const codeToVisit = toNext.map((c) => { return c.code })
   const [test, setTest] = useState('')
+
 
   return (
     <div className="mapProfil">

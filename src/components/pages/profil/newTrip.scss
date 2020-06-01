@@ -1,5 +1,6 @@
 .trip{
   display: flex;
+  height: 68vh;
   .lastTrip, .nextTrip{
     width: 50%;
     margin: 1% 5%;
@@ -10,6 +11,7 @@
   .lastTrip{
     background-color: rgba(255,164,27,0.3);
     border-radius: 20px;
+    height: 50%;
     ul{
       display: flex;
       li{
@@ -20,11 +22,12 @@
     }
   }
   .nextTrip{
+    height: 50%;
     form{
       display: flex;
       flex-direction: column;
       margin: auto;
-      background-color: #ffa41b;
+      text-align: center;
       border-radius: 20px;
       .country, .monthly{
         display: flex;
