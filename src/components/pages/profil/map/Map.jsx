@@ -16,7 +16,7 @@ function Map(props) {
   const toNext = useSelector(state => state.NextTrip);
   const codeVisited = toPassed.map((c) => { return c.code })
   const codeToVisit = toNext.map((c) => { return c.code })
-  const [test, setTest] = useState('')
+
 
 
   return (
@@ -31,8 +31,8 @@ function Map(props) {
                   geography={geo}
                   onMouseEnter={() => {
                     console.log(geo.properties.ISO_A3);
-                    const { NAME } = geo.properties;
-                    setTest(`${NAME} — `);
+
+
                   }}
                   style={{
                     default: {
