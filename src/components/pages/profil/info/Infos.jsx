@@ -7,8 +7,6 @@ const { apiSite } = require("../../../../conf")
 
 function Infos() {
   const [profil, setProfil] = useState([]);
-  const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('Choose File');
   const [preview, setPreview] = useState('')
   const toPassed = useSelector(state => state.LastTrip);
   const user = useSelector(state => state.user);
@@ -24,9 +22,7 @@ function Infos() {
 
   const onChange = e => {
     return new Promise((resolve) => {
-      setFile(e.target.files[0]);
       setPreview(URL.createObjectURL(e.target.files[0]));
-      setFilename(e.target.files[0].name)
       return resolve(e.target.files[0])
     })
       .then((file) => {
