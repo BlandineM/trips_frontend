@@ -20,10 +20,13 @@
     .country_name{
       margin-top: 1%;
     }
-    .fleche{
-      width: 25px;
-      height: 25px;
-      margin-top: 2%;
+    span{
+      margin: 2%;
+      margin-top: 1%;
+      .fleche{
+        width: 25px;
+        height: 25px;
+      }
     }
   }
   .empty{

@@ -64,10 +64,14 @@ function LastNextTrip() {
                       <h1 className="country_name">{country.country_name}</h1>
                       <h2 className="compte">Dans {compteur(country)}</h2>
                     </div>
-                    <img src="/fleche_bas_next.png" alt="fleche" className={`fleche ${isToggledToCheck ? "haut" : "bas"}`} />
+                    <span title="Déroule les voyages prévus">
+                      <img src="/fleche_bas_next.png" alt="fleche" className={`fleche ${isToggledToCheck ? "haut" : "bas"}`} />
+                    </span>
                   </div>
                   <NavLink to={`/new`} className="newTrip">
-                    <h1 className="addTrip">+</h1>
+                    <span title="Ajoute une voyage !">
+                      <h1 className="addTrip">+</h1>
+                    </span>
                   </NavLink>
                 </div>
               )
@@ -94,10 +98,14 @@ function LastNextTrip() {
               ? (
                 <div className="lastTrip" onClick={toggleCheck}>
                   <NavLink to={`/new`} className="newTrip">
-                    <h1 className="addTrip">+</h1>
+                    <span title="Ajoute un voyage !">
+                      <h1 className="addTrip">+</h1>
+                    </span>
                   </NavLink>
                   <div className="pays">
-                    <img src="/fleche_bas_last.png" alt="fleche" className={`fleche ${isToggledCheck ? "haut" : "bas"}`} />
+                    <span title="Déroule les voyages éffectués.">
+                      <img src="/fleche_bas_last.png" alt="fleche" className={`fleche ${isToggledCheck ? "haut" : "bas"}`} />
+                    </span>
                     <div>
                       <h1 className="country_name">{countryLast.country_name}</h1>
                       <h2 className="compte">Il y a  {compteur(countryLast)}</h2>
