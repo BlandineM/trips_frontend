@@ -8,13 +8,16 @@
     margin: 1%;
     text-align: center;
   }
+  .check, .new{
+    color: white;
+    cursor: pointer;
+    height: 25px;
+  }
   .check{
     background: linear-gradient(135deg,#27496d, #5A7CA0);
-    cursor: pointer;
   }
   .new{
     background: linear-gradient(135deg,#4cd3c2, #19A08F);
-    cursor: pointer;
   }
   .mapworld, .list{
     width: 80%;

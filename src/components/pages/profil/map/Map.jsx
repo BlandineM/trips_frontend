@@ -9,7 +9,7 @@ import {
 import "./map.scss"
 
 function Map(props) {
-  const check = props.statut;
+  const check = props.check;
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
   const toPassed = useSelector(state => state.LastTrip);
@@ -36,11 +36,13 @@ function Map(props) {
                   }}
                   style={{
                     default: {
-                      fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "rgba(39,73,109,1)" : "#4cd3c2") : "#D6D6DA",
+                      fill: (check ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3)
+                        ? (check ? "rgba(39,73,109,1)" : "#4cd3c2")
+                        : "#2f3032",
                       outline: "none"
                     },
                     hover: {
-                      fill: (check === "fait" ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check === "fait" ? "rgba(39,73,109,1)" : "#4cd3c2") : "#D6D6DA",
+                      fill: (check ? codeVisited : codeToVisit).includes(geo.properties.ISO_A3) ? (check ? "rgba(39,73,109,1)" : "#4cd3c2") : "#2f3032",
                       outline: "none"
                     }
 
