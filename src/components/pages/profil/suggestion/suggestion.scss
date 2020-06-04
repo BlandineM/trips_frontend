@@ -1,5 +1,5 @@
 .containerSuggest {
-  height: 300px;
+  height: 370px;
   top: 80px;
   display: flex;
   margin-left: 12%;
@@ -7,51 +7,51 @@
   margin-bottom: 3%;
   .cardSugges {
     display: flex;
-    height: 280px;
+    height: 350px;
     width: 300px;
-    background-color: #031139;
+    background-color: white;
     border-radius: 10px;
-    box-shadow: -1rem 0 3rem #000;
+    box-shadow: 1rem 0 3rem #000;
     transition: 0.4s ease-out;
     position: relative;
     left: 0px;
     margin-top: 3%;
-    .titleSugges {
-      color: white;
-      font-weight: 300;
+    border-bottom:thick double #32a1ce; ;
+    .flagSugges {
       position: absolute;
-      left: 20px;
-      top: 15px;
+      top: 7px;
+    }
+    .titleSugges {
+      color: #38A2D6;
+      font-size: 1.5em;
+      font-weight: 1000;
+      position: absolute;
+      left: 85px;
+      top: 180px;
+      text-transform: uppercase;
     }
     .periodSugges {
-      color: white;
+      color: rgb(5, 4, 4);
       font-weight: 300;
       position: absolute;
       left: 20px;
-      top: 60px;
+      top: 225px;
     }
-  .bar {
-    position: absolute;
-    top: 100px;
-    left: 20px;
-    height: 5px;
-    width: 150px;
-  }
-  .emptybar {
-    background-color: #2e3033;
-    width: 100%;
-    height: 100%;
-  }
-  .filledbar {
-    position: absolute;
-    top: 0px;
-    z-index: 3;
-    width: 0px;
-    height: 100%;
-    background: rgb(0,154,217);
-    background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
-    transition: 0.6s ease-out;
-  }
+        .tempSugges {
+      color: rgb(5, 4, 4);
+      font-weight: 300;
+      position: absolute;
+      left: 20px;
+      top: 260px;
+    }
+        .precSugges {
+      color: rgb(5, 4, 4);
+      font-weight: 300;
+      position: absolute;
+      left: 130px;
+      top: 260px;
+    }
+
   }
   .cardSugges:not(:first-child) {
       margin-left: -50px;
@@ -68,14 +68,6 @@
   .cardSugges:hover .filledbar {
     width: 120px;
     transition: 0.4s ease-out;
-  }
-  .circle {
-    position: absolute;
-    top: 150px;
-    left: 30px;
-    right: 30px;
-
-
   }
 
 }

@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./lastNextTrip.scss"
 import TripList from './list/TripList';
+import { NavLink } from "react-router-dom";
 
 function LastNextTrip() {
-  const [check, setCheck] = useState('aFaire');
+  const [isToggledToCheck, setToggledToCheck] = useState(false);
+  const toggleToCheck = () => setToggledToCheck(!isToggledToCheck);
+  const [isToggledCheck, setToggledCheck] = useState(false);
+  const toggleCheck = () => setToggledCheck(!isToggledCheck);
   const toNext = useSelector(state => state.NextTrip);
   const toPassed = useSelector(state => state.LastTrip);
   const mois = [
@@ -42,60 +46,92 @@ function LastNextTrip() {
     }
     return (`${compteur} ${unite}`)
   }
-
   return (
     <div>
-      {toNext.map((country, i) => {
-        return (
-          i === 0
-            ? (
-              <div className="nextTrip" onClick={() => { setCheck('aFaire') }}>
-                <div className="date">
-                  <h1>{mois[country.month]}</h1>
-                  {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
-                </div>
-                <div className="pays">
-                  <img src={country.flag} alt="flag of country" />
-                  <div>
-                    <h1 className="country_name">{country.country_name}</h1>
-
-                    <h2 className="compte">Dans {compteur(country)}</h2>
-
+      {toNext.length > 0
+        ? toNext.map((country, i) => {
+          return (
+            i === 0
+              ? (
+                <div className="nextTrip" onClick={toggleToCheck}>
+                  <div className="date">
+                    <h1>{mois[country.month]}</h1>
+                    {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
                   </div>
+                  <div className="pays">
+                    <img src={country.flag} alt="flag of country" />
+                    <div>
+                      <h1 className="country_name">{country.country_name}</h1>
+                      <h2 className="compte">Dans {compteur(country)}</h2>
+                    </div>
+                    <span title="Déroule les voyages prévus">
+                      <img src="/fleche_bas_next.png" alt="fleche" className={`fleche ${isToggledToCheck ? "haut" : "bas"}`} />
+                    </span>
+                  </div>
+                  <NavLink to={`/new`} className="newTrip">
+                    <span title="Ajoute une voyage !">
+                      <h1 className="addTrip">+</h1>
+                    </span>
+                  </NavLink>
                 </div>
-              </div>
-            )
-            : ""
-        )
-      })}
-      {check === 'aFaire'
-        ? <TripList check={check} />
+              )
+              : ""
+          )
+        })
+        : (<div className="nextTrip">
+          <div className="empty">
+            <h1 className="nextTripEmpty">Tu n'as pas de prochain voyages de prévu</h1>
+            <NavLink to={`/new`} className="newTrip">
+              <h1 className="addTrip Next">+</h1>
+            </NavLink>
+          </div>
+        </div>)
+      }
+      {isToggledToCheck
+        ? <TripList toCheck={isToggledToCheck} />
         : ""}
 
-
-      {toPassed.map((countryLast, i) => {
-        return (
-          i === 0
-            ? (
-              <div className="lastTrip" onClick={() => { setCheck('fait') }}>
-                <div className="pays">
-                  <div>
-                    <h1 className="country_name">{countryLast.country_name}</h1>
-                    <h2 className="compte">Il y a  {compteur(countryLast)}</h2>
+      {toPassed.length > 0
+        ? (toPassed.map((countryLast, i) => {
+          return (
+            i === 0
+              ? (
+                <div className="lastTrip" onClick={toggleCheck}>
+                  <NavLink to={`/new`} className="newTrip">
+                    <span title="Ajoute un voyage !">
+                      <h1 className="addTrip">+</h1>
+                    </span>
+                  </NavLink>
+                  <div className="pays">
+                    <span title="Déroule les voyages éffectués.">
+                      <img src="/fleche_bas_last.png" alt="fleche" className={`fleche ${isToggledCheck ? "haut" : "bas"}`} />
+                    </span>
+                    <div>
+                      <h1 className="country_name">{countryLast.country_name}</h1>
+                      <h2 className="compte">Il y a  {compteur(countryLast)}</h2>
+                    </div>
+                    <img src={countryLast.flag} alt="flag of country" />
                   </div>
-                  <img src={countryLast.flag} alt="flag of country" />
+                  <div className="date">
+                    <h1>{mois[countryLast.month]}</h1>
+                    {countryLast.year != null ? (<h1>{countryLast.year}</h1>) : (<h1>Année à définir</h1>)}
+                  </div>
                 </div>
-                <div className="date">
-                  <h1>{mois[countryLast.month]}</h1>
-                  {countryLast.year != null ? (<h1>{countryLast.year}</h1>) : (<h1>Année à définir</h1>)}
-                </div>
-              </div>
-            )
-            : ""
-        )
-      })}
-      {check === 'fait'
-        ? <TripList check={check} />
+              )
+              : ""
+          )
+        }))
+        : (<div className="lastTrip">
+          <div className="empty">
+            <NavLink to={`/new`} className="newTrip">
+              <h1 className="addTrip">+</h1>
+            </NavLink>
+            <h1 className="lastTripEmpty">Tu n'as pas de voyages effectué</h1>
+          </div>
+        </div>
+        )}
+      {isToggledCheck
+        ? <TripList check={isToggledCheck} />
         : ""}
     </div>
   )

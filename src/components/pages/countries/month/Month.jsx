@@ -3,7 +3,6 @@ import axios from "axios";
 import NavBar from "../../../NavBar";
 import "./Month.scss";
 import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 import MonthCard from './MonthCard';
 
 const { apiSite } = require("../../../../conf");
@@ -65,12 +64,6 @@ function Month() {
             })}
           </div>
         </div>
-        <NavLink to={`/newtrip`} className="newTrip">
-          <div className="addTrip">
-            <h2>Ajoute un voyage en {mois[month]} ? </h2>
-          </div>
-        </NavLink>
-
         <div className="separation"></div>
 
         <div className="titlecard">

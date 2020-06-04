@@ -35,27 +35,31 @@ export default function Suggestion() {
     return a.id_periods - b.id_periods
   })
   return (
-    <div className="containerSuggest">
-      <h1>Besoins d'idées:</h1>
+    sugges.length < 0
+      ?
+      <div className="containerSuggest">
+        <h1>Besoins d'idées:</h1>
 
-      {sugges.map((country) => {
-        return (
-          <div className="cardSugges">
-            <h3 className="titleSugges">{country.nameFr}</h3>
-            <h3 className="periodSugges">{mois[country.id_periods]}</h3>
-            <div className="bar">
-              <div className="emptybar"></div>
-              <div className="filledbar"></div>
+        {sugges.map((country) => {
+          return (
+            <div className="cardSugges">
+              <div className="flagSugges">
+                <img src={country.pictures ? country.pictures : country.flag} alt={country.name} />
+              </div>
+              <h3 className="titleSugges">{country.nameFr}</h3>
+              <h3 className="periodSugges">Départ en {mois[country.id_periods]}</h3>
+              <h3 className="tempSugges">{country.temperature} C°</h3>
+              <h3 className="precSugges">{country.precipitation} mm</h3>
+
             </div>
-            <div className="circle">
-              <img src={country.pictures ? country.pictures : country.flag} alt={country.name} />
-            </div>
-          </div>
-        )
+          )
 
-      })}
+        })}
 
-    </div>
+      </div>
+      : ""
+
+
   )
 
 }

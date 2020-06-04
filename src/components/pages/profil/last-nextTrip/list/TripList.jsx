@@ -5,6 +5,7 @@ import "./tripList.scss"
 
 function TripList(props) {
   const check = props.check
+  const toCheck = props.toCheck
   const toPassed = useSelector(state => state.LastTrip);
   const toNext = useSelector(state => state.NextTrip);
 
@@ -25,33 +26,18 @@ function TripList(props) {
   }
   const arraySectionPassed = carrousel(toPassed)
   const arraySectionNext = carrousel(toNext)
-
-
-
   return (
     <div className="list_countries">
 
       <div className="container">
 
         <div class="wrapper">
-          {check === 'fait'
-            ? arraySectionPassed.map((section, i) => {
-              return (<section id={`section${i}`}>
-                <a href={i === 0 ? `#section${arraySectionPassed.length}` : `#section${i - 1}`} class="arrow__btn">‹</a>
-                {section.map((country) => {
-                  return (<div className={`list_entete${check === "fait" ? " visible" : ""}`}>
-                    <TripCard country={country} />
-                  </div>)
-
-                })}
-                <a href={i === arraySectionPassed.length - 1 ? `#section0` : `#section${i + 1}`} class="arrow__btn">›</a>
-              </section>)
-            })
-            : arraySectionNext.map((section, i) => {
+          {toCheck
+            ? arraySectionNext.map((section, i) => {
               return (<section id={`section${i}`}>
                 <a href={i === 0 ? `#section${arraySectionNext.length}` : `#section${i - 1}`} class="arrow__btn">‹</a>
                 {section.map((country) => {
-                  return (<div className={`list_entete${check === "aFaire" ? " visible" : ""}`}>
+                  return (<div className={`list_entete`}>
                     <TripCard country={country} />
                   </div>)
 
@@ -59,6 +45,21 @@ function TripList(props) {
                 <a href={i === arraySectionNext.length - 1 ? `#section0` : `#section${i + 1}`} class="arrow__btn">›</a>
               </section>)
             })
+            : ""
+          }
+          {check
+            ? arraySectionPassed.map((section, i) => {
+              return (<section id={`section${i}`}>
+                <a href={i === 0 ? `#section${arraySectionPassed.length}` : `#section${i - 1}`} class="arrow__btn">‹</a>
+                {section.map((country) => {
+                  return (<div className={`list_entete`}>
+                    <TripCard country={country} />
+                  </div>)
+                })}
+                <a href={i === arraySectionPassed.length - 1 ? `#section0` : `#section${i + 1}`} class="arrow__btn">›</a>
+              </section>)
+            })
+            : ""
           }
         </div>
 
