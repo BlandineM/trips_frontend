@@ -21,6 +21,18 @@
       margin-top: 1%;
     }
   }
+  .empty{
+    display: flex;
+    width: 100%;
+    .lastTripEmpty, .nextTripEmpty, .newTrip{
+      width: 50%;
+      margin: 1%;
+    }
+    .lastTripEmpty, .Next{
+      text-align: end;
+    }
+
+  }
 }
 .nextTrip{
   box-shadow: 10px 5px 3px #86c7be;
@@ -37,6 +49,10 @@
   .date{
     background: linear-gradient(135deg,#4cd3c2, #19A08F);
   }
+    .addTrip{
+      color: #86c7be;
+      font-size: 3.3em;
+  }
 }
 .lastTrip{
   box-shadow: -10px 5px 3px #3b5c80;
@@ -47,11 +63,16 @@
       margin-left: 3%;
       margin-right: 1%;
     }
-    .compte{
+    .compte {
       color: #7d92a7;
     }
   }
   .date{
     background: linear-gradient(135deg,#27496d, #5A7CA0);
+  }
+  .addTrip{
+    color: #7d92a7;
+    font-size: 3.3em;
+
   }
 }
