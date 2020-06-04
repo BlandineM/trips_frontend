@@ -20,6 +20,11 @@
     .country_name{
       margin-top: 1%;
     }
+    .fleche{
+      width: 25px;
+      height: 25px;
+      margin-top: 2%;
+    }
   }
   .empty{
     display: flex;
@@ -42,6 +47,15 @@
       margin-left: 1%;
       margin-right: 3%;
     }
+    .haut{
+      transform: rotate(180deg);
+      transition: transform .3s ease-in-out; 
+    }
+    .bas{
+      transform: rotate(360deg);
+      transition: transform .3s ease-in-out;
+    }
+
     .compte{
       color: #86c7be;
     }
@@ -63,6 +77,15 @@
       margin-left: 3%;
       margin-right: 1%;
     }
+    .haut{
+      transform: rotate(180deg);
+      transition: transform .3s ease-in-out; 
+    }
+    .bas{
+      transform: rotate(360deg);
+      transition: transform .3s ease-in-out;
+    }
+
     .compte {
       color: #7d92a7;
     }

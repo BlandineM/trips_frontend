@@ -5,7 +5,10 @@ import TripList from './list/TripList';
 import { NavLink } from "react-router-dom";
 
 function LastNextTrip() {
-  const [check, setCheck] = useState('aFaire');
+  const [isToggledToCheck, setToggledToCheck] = useState(false);
+  const toggleToCheck = () => setToggledToCheck(!isToggledToCheck);
+  const [isToggledCheck, setToggledCheck] = useState(false);
+  const toggleCheck = () => setToggledCheck(!isToggledCheck);
   const toNext = useSelector(state => state.NextTrip);
   const toPassed = useSelector(state => state.LastTrip);
   const mois = [
@@ -50,7 +53,7 @@ function LastNextTrip() {
           return (
             i === 0
               ? (
-                <div className="nextTrip" onClick={() => { setCheck('aFaire') }}>
+                <div className="nextTrip" onClick={toggleToCheck}>
                   <div className="date">
                     <h1>{mois[country.month]}</h1>
                     {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
@@ -59,11 +62,13 @@ function LastNextTrip() {
                     <img src={country.flag} alt="flag of country" />
                     <div>
                       <h1 className="country_name">{country.country_name}</h1>
-
                       <h2 className="compte">Dans {compteur(country)}</h2>
-
                     </div>
+                    <img src="/fleche_bas_next.png" alt="fleche" className={`fleche ${isToggledToCheck ? "haut" : "bas"}`} />
                   </div>
+                  <NavLink to={`/new`} className="newTrip">
+                    <h1 className="addTrip">+</h1>
+                  </NavLink>
                 </div>
               )
               : ""
@@ -78,8 +83,8 @@ function LastNextTrip() {
           </div>
         </div>)
       }
-      {check === 'aFaire'
-        ? <TripList check={check} />
+      {isToggledToCheck
+        ? <TripList toCheck={isToggledToCheck} />
         : ""}
 
       {toPassed.length > 0
@@ -87,8 +92,12 @@ function LastNextTrip() {
           return (
             i === 0
               ? (
-                <div className="lastTrip" onClick={() => { setCheck('fait') }}>
+                <div className="lastTrip" onClick={toggleCheck}>
+                  <NavLink to={`/new`} className="newTrip">
+                    <h1 className="addTrip">+</h1>
+                  </NavLink>
                   <div className="pays">
+                    <img src="/fleche_bas_last.png" alt="fleche" className={`fleche ${isToggledCheck ? "haut" : "bas"}`} />
                     <div>
                       <h1 className="country_name">{countryLast.country_name}</h1>
                       <h2 className="compte">Il y a  {compteur(countryLast)}</h2>
@@ -113,8 +122,8 @@ function LastNextTrip() {
           </div>
         </div>
         )}
-      {check === 'fait'
-        ? <TripList check={check} />
+      {isToggledCheck
+        ? <TripList check={isToggledCheck} />
         : ""}
     </div>
   )
