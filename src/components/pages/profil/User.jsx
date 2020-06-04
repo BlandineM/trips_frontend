@@ -7,6 +7,7 @@ import LastNextTrip from "./last-nextTrip/LastNextTrip";
 import Map from "./map/Map"
 import "./user.scss"
 import Suggestion from './suggestion/Suggestion';
+import { NavLink } from "react-router-dom";
 // import Data from '/data/data.json'
 
 const { apiSite } = require("../../../conf")
@@ -52,7 +53,6 @@ function User() {
           :
           ""
       }
-      <h1 className="title_user">Ajoute un voyage </h1>
     </div >
 
   );
