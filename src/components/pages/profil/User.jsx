@@ -21,8 +21,6 @@ function User() {
     axios.get(`${apiSite}/me/profil/countries`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(({ data }) => {
-      console.log(data, "data user ");
-
       dispatch({ type: "DATA_LAST_TRIP", data: data.filter(data => data.check === 1) });
       dispatch({ type: "DATA_NEXT_TRIP", data: data.filter(data => data.check === 0) })
     });
