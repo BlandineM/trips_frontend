@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./header.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 const { apiSite } = require("../conf");
 
 export default function Header() {
-  const user = useSelector(state => state.user);
   const [profil, setProfil] = useState([]);
-  const dispatch = useDispatch();
   const isLogin = () => {
     if (localStorage.getItem('token') != null) {
       return true
@@ -22,9 +19,7 @@ export default function Header() {
       setProfil(data);
     });
 
-  }, [dispatch, user.id])
-  console.log(user);
-
+  }, [])
   return (
     <div className="header">
       {isLogin()}
