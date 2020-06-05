@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./header.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Axios from 'axios';
+import axios from 'axios';
 const { apiSite } = require("../conf");
 
 export default function Header() {
   const user = useSelector(state => state.user);
+  const [profil, setProfil] = useState([]);
   const dispatch = useDispatch();
   const isLogin = () => {
     if (localStorage.getItem('token') != null) {
@@ -15,11 +16,12 @@ export default function Header() {
     return false
   }
   useEffect(() => {
+    axios.get(`${apiSite}/me/profil`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    }).then(({ data }) => {
+      setProfil(data);
+    });
 
-    Axios.get(`${apiSite}/${user.id}`)
-      .then(({ data }) => {
-        dispatch({ type: "FETCHING_USER_DATA", value: data })
-      })
   }, [dispatch, user.id])
   console.log(user);
 
@@ -31,7 +33,7 @@ export default function Header() {
 </style>
       <div className="nav">
         <ul>
-          <li className="destinations">Destinations</li>
+          <li className="destinations"></li>
           <li>
             <a href="/">
               <img src="https://res.cloudinary.com/blandine/image/upload/v1586076479/harley_trip_rogner.png" alt="logo"></img>
@@ -39,7 +41,13 @@ export default function Header() {
           </li>
           {isLogin()
             ? <Link to="/profil">
-              <li>{user.avatar}</li>
+              {profil.map((user) => {
+                return (
+                  <div>
+                    <img src={user.avatar} alt="avatar" className="avatar-header" />
+                  </div>
+                )
+              })}
             </Link>
             : <Link to="/connexion">
               <li>Se connecter</li>
