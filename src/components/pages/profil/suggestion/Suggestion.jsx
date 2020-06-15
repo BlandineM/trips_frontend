@@ -40,9 +40,9 @@ export default function Suggestion() {
       <div className="containerSuggest">
         <h1>Besoins d'idées:</h1>
 
-        {sugges.map((country) => {
+        {sugges.map((country, i) => {
           return (
-            <div className="cardSugges">
+            <div key={i} className="cardSugges">
               <div className="flagSugges">
                 <img src={country.pictures ? country.pictures : country.flag} alt={country.name} />
               </div>
