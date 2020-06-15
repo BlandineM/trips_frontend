@@ -23,7 +23,6 @@ export default function Header() {
     });
 
   }, [dispatch, user.id])
-  console.log(user);
 
   return (
     <div className="header">
