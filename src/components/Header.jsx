@@ -41,9 +41,9 @@ export default function Header() {
           </li>
           {isLogin()
             ? <Link to="/profil">
-              {profil.map((user) => {
+              {profil.map((user, i) => {
                 return (
-                  <div>
+                  <div key={i}>
                     <img src={user.avatar} alt="avatar" className="avatar-header" />
                   </div>
                 )

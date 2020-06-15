@@ -45,7 +45,7 @@ function Infos() {
             ?
             (
 
-              <div className="profil">
+              <div className="profil" key={i}>
 
                 <div className="picture">
                   <form>
