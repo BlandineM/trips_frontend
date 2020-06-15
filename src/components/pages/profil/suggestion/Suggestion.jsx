@@ -4,7 +4,6 @@ import axios from 'axios';
 import "./suggestion.scss"
 
 const { apiSite } = require("../../../../conf")
-
 export default function Suggestion() {
   const [sugges, setSugges] = useState([]);
   const user = useSelector(state => state.user);
@@ -24,7 +23,7 @@ export default function Suggestion() {
   ]
 
   useEffect(() => {
-    axios.get(`${apiSite}/suggestion/2`, {
+    axios.get(`${apiSite}/suggestion`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     }).then(({ data }) => {
       setSugges(data)
@@ -34,8 +33,9 @@ export default function Suggestion() {
   sugges.sort(function (a, b) {
     return a.id_periods - b.id_periods
   })
+
   return (
-    sugges.length < 0
+    sugges != null
       ?
       <div className="containerSuggest">
         <h1>Besoins d'idées:</h1>
