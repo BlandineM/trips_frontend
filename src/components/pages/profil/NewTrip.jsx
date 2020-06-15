@@ -51,14 +51,30 @@ function NewTrip() {
       </NavLink>
       <div className="trip">
         <div className="lastTrip">
-          <h1>Tes derniers voyages:</h1>
-          <ul>
-            {toPassed.map((visit) => {
+          <table >
+            <thead>
+              <tr>
+                <td>
+                  Tes derniers voyages:
+                </td>
+              </tr>
+            </thead>
+            {toPassed.map((visit, i) => {
               return (
-                <li>{visit}</li>
+                <tbody key={i}>
+                  <tr >
+
+                    <td><img src={visit.flag} alt={visit.country_name} /></td>
+                    <td >
+                      {visit.country_name}
+                    </td>
+                    <td>{visit.year}</td>
+
+                  </tr>
+                </tbody>
               )
             })}
-          </ul>
+          </table>
         </div>
 
         <div className="nextTrip">
@@ -74,7 +90,7 @@ function NewTrip() {
               <input list="countries" onChange={evt => setCountry(evt.target.value)} />
               <datalist name="countries" id="countries">
                 {countries.map((country) => {
-                  return (<option data-value={country.id_countries} value={country.nameFr} key={country.id_countries}></option>)
+                  return (<option data-value={country.id_countries} value={country.id_countries} key={country.id_countries}></option>)
                 })}
               </datalist>
             </div>
