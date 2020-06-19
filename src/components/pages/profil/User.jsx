@@ -37,10 +37,7 @@ function User() {
 
 
       <div className="mapworld">
-        <div>
-          <h3 onClick={toggleCheck} className={`legend ${isToggledCheck ? "new" : "check"}`}>{isToggledCheck ? "A Faire" : "Fait"}</h3>
-        </div>
-        <Map check={isToggledCheck} />
+        <Map />
       </div>
 
     </div >
