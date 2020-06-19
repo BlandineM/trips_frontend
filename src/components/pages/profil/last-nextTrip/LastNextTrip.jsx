@@ -53,7 +53,7 @@ function LastNextTrip() {
           return (
             i === 0
               ? (
-                <div className="nextTrip" onClick={toggleToCheck}>
+                <div className="nextTrip" onClick={toggleToCheck} key={i}>
                   <div className="date">
                     <h1>{mois[country.month]}</h1>
                     {country.year != null ? (<h1>{country.year}</h1>) : (<h1>Année à définir</h1>)}
@@ -96,7 +96,7 @@ function LastNextTrip() {
           return (
             i === 0
               ? (
-                <div className="lastTrip" onClick={toggleCheck}>
+                <div className="lastTrip" onClick={toggleCheck} key={i}>
                   <NavLink to={`/new`} className="newTrip">
                     <span title="Ajoute un voyage !">
                       <h1 className="addTrip">+</h1>

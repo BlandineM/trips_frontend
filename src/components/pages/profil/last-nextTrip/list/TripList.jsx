@@ -34,7 +34,7 @@ function TripList(props) {
         <div class="wrapper">
           {toCheck
             ? arraySectionNext.map((section, i) => {
-              return (<section id={`section${i}`}>
+              return (<section key={i} id={`section${i}`}>
                 <a href={i === 0 ? `#section${arraySectionNext.length}` : `#section${i - 1}`} class="arrow__btn">‹</a>
                 {section.map((country) => {
                   return (<div className={`list_entete`}>
@@ -49,7 +49,7 @@ function TripList(props) {
           }
           {check
             ? arraySectionPassed.map((section, i) => {
-              return (<section id={`section${i}`}>
+              return (<section key={i} id={`section${i}`}>
                 <a href={i === 0 ? `#section${arraySectionPassed.length}` : `#section${i - 1}`} class="arrow__btn">‹</a>
                 {section.map((country) => {
                   return (<div className={`list_entete`}>

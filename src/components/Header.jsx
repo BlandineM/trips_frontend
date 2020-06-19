@@ -18,8 +18,8 @@ export default function Header() {
     }).then(({ data }) => {
       setProfil(data);
     });
-
   }, [])
+
   return (
     <div className="header">
       {isLogin()}
