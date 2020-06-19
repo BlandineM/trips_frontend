@@ -98,9 +98,9 @@ function NewTrip() {
             <div className="monthly">
               <h1>Période:</h1>
               <label htmlFor="month" ></label>
-              <input list="month" onChange={evt => (console.log(evt.target.value, "evt target period ")
-                //  setMonth(evt.target.value)}
-              )}
+              <input list="month" onChange={evt =>
+                setMonth(evt.target.value)}
+
               />
               <datalist name="month" id="month">
                 {mois.map((country, i) => {
