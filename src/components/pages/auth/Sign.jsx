@@ -34,9 +34,11 @@ function Sign() {
         }))
       : (axios
         .post(`${apiSite}/auth/signup`, {
+          name,
           login,
           password
         }).then(({ data }) => {
+          localStorage.setItem('token', data.token);
           history.push("/profil");
           dispatch({ type: "CREATE_USER_DATA", value: data });
         }))
