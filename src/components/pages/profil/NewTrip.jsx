@@ -3,16 +3,17 @@ import { useSelector } from "react-redux";
 import Axios from 'axios';
 import "./newTrip.scss"
 import { NavLink } from "react-router-dom";
+import moment from 'moment';
+import Select from 'react-select';
 
 const { apiSite } = require("../../../conf")
 function NewTrip() {
   const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState([]);
-  const [year, setYear] = useState([]);
+  const [country, setCountry] = useState();
+  const [year, setYear] = useState();
   const [month, setMonth] = useState();
-  const [check, setCheck] = useState(null);
   const toPassed = useSelector(state => state.LastTrip);
-  const mois = [
+  const monthList = [
     "Janvier",
     "Février",
     "Mars",
@@ -33,16 +34,25 @@ function NewTrip() {
     })
   }, [])
 
+  function selectCountry(selectedCountry) {
+    setCountry(selectedCountry.value );
+  }
+
+  function selectMonth(selectedMonth) {
+    setMonth(selectedMonth.value );
+  }
+
   function valider(e) {
-    Axios.post(`${apiSite}/me/trip`,
-      {
-        country,
-        month,
-        year,
-        check
-      },
-      { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-    )
+    if(country  !== undefined && month !== undefined && year !== undefined){
+      Axios.post(`${apiSite}/me/trip`,
+          {
+            country,
+            month,
+            year
+          },
+          { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+      )
+    }
   }
   return (
     <div>
@@ -87,41 +97,34 @@ function NewTrip() {
             <div className="country">
               <h1>Pays:</h1>
               <label htmlFor="countries"></label>
-              <input list="countries" onChange={evt => setCountry(evt.target.value)} />
-              <datalist name="countries" id="countries">
-                {countries.map((country) => {
-                  return (<option data-value={country.id_countries} value={country.id_countries} key={country.id_countries}></option>)
-                })}
-              </datalist>
+              <Select
+                  id="countries"
+                  onChange={selectCountry}
+                  options={countries.map((country) => {
+                    return {value: country.id_countries, label: country.name}
+                  })}
+                  isSearchable="true"
+              />
             </div>
 
             <div className="monthly">
               <h1>Période:</h1>
               <label htmlFor="month" ></label>
-              <input list="month" onChange={evt =>
-                setMonth(evt.target.value)}
-
+              <Select
+                  id="month"
+                  onChange={selectMonth}
+                  options={monthList.map((month, i) => {
+                    return {value: i+1, label: month}
+                  })}
+                  isSearchable="true"
               />
-              <datalist name="month" id="month">
-                {mois.map((country, i) => {
-                  return (<option value={i + 1} data-value={country} key={i}></option>)
-                })}
-              </datalist>
-              <input type="hidden" name="answer" id="answerInput-hidden"></input>
 
               <label htmlFor="year"></label>
               <input type="number" id="year" placeholder="1970" min="1970" onChange={evt => setYear(evt.target.value)}></input>
             </div>
-
-            <div>
-              <input type="radio" value="1" id="checkCoice1" name="check" onChange={evt => setCheck(evt.target.value)} />
-              <label htmlFor="checkCoice1">Fait</label>
-              <input type="radio" value="0" id="checkCoice2" name="check" onChange={evt => setCheck(evt.target.value)} />
-              <label htmlFor="checkCoice2">A faire</label>
-            </div>
-            {check === null
+            {(month === undefined || year === undefined)
               ? ""
-              : <h3>{check === "1" ? "Tu es parties" : "Tu vas partir"} {country} au mois de {mois[parseInt(month) - 1]} en {year}</h3>
+              : <h3>{moment().set({'year': year, 'month': month}).isSameOrBefore(moment())  ? "Tu es parties" : "Tu vas partir"} {countries[country-1].name} au mois de {monthList[parseInt(month) - 1]} en {year}</h3>
             }
 
             <input type="submit" className="valider" />
