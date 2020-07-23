@@ -11,6 +11,9 @@ function NewTrip() {
   const [year, setYear] = useState([]);
   const [month, setMonth] = useState();
   const [check, setCheck] = useState(null);
+  const [preview, setPreview] = useState('')
+  const [file, setFile] = useState('')
+  const [description, setDescription] = useState('')
   const toPassed = useSelector(state => state.LastTrip);
   const mois = [
     "Janvier",
@@ -25,7 +28,13 @@ function NewTrip() {
     "Octobre",
     "Novembre",
     "Décembre"
-  ]
+  ];
+  const onChange = e => {
+    return new Promise(() => {
+      setPreview(URL.createObjectURL(e.target.files[0]));
+      setFile(e.target.files[0]);
+    })
+  };
 
   useEffect(() => {
     Axios.get(`${apiSite}/countries`).then(({ data }) => {
@@ -34,20 +43,26 @@ function NewTrip() {
   }, [])
 
   function valider(e) {
-    Axios.post(`${apiSite}/me/trip`,
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('country', country);
+    formData.append('month', month);
+    formData.append('year', year);
+    formData.append('check', check);
+    formData.append('description', description);
+    return Axios.post(`${apiSite}/me/trip`, formData,
       {
-        country,
-        month,
-        year,
-        check
-      },
-      { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      }
     )
   }
   return (
     <div>
       <NavLink to={`/profil`}>
-        <img src="/fleche.png" alt="" />
+        <img src="/fleche.png" alt="retour" />
       </NavLink>
       <div className="trip">
         <div className="lastTrip">
@@ -85,8 +100,7 @@ function NewTrip() {
             <h1>Ajoute un voyage?</h1>
 
             <div className="country">
-              <h1>Pays:</h1>
-              <label htmlFor="countries"></label>
+              <label htmlFor="countries">Pays:</label>
               <input list="countries" onChange={evt => setCountry(evt.target.value)} />
               <datalist name="countries" id="countries">
                 {countries.map((country) => {
@@ -96,20 +110,17 @@ function NewTrip() {
             </div>
 
             <div className="monthly">
-              <h1>Période:</h1>
-              <label htmlFor="month" ></label>
+              <label htmlFor="month" >Période: </label>
               <input list="month" onChange={evt =>
                 setMonth(evt.target.value)}
-
               />
               <datalist name="month" id="month">
                 {mois.map((country, i) => {
                   return (<option value={i + 1} data-value={country} key={i}></option>)
                 })}
               </datalist>
-              <input type="hidden" name="answer" id="answerInput-hidden"></input>
-
-              <label htmlFor="year"></label>
+              {/* <input type="hidden" name="answer" id="answerInput-hidden"></input> */}
+              <label htmlFor="year">Année:</label>
               <input type="number" id="year" placeholder="1970" min="1970" onChange={evt => setYear(evt.target.value)}></input>
             </div>
 
@@ -123,6 +134,26 @@ function NewTrip() {
               ? ""
               : <h3>{check === "1" ? "Tu es parties" : "Tu vas partir"} {country} au mois de {mois[parseInt(month) - 1]} en {year}</h3>
             }
+            <label for="story">Quelques lignes sur ton voyage:</label>
+
+            <textarea id="story" name="story"
+              rows="5" cols="33" onChange={evt => setDescription(evt.target.value)}>
+            </textarea>
+            <label className='custom-file-label' htmlFor='customFile'>
+              {preview ? <img src={preview} alt="profil" />
+                : (<img src={('https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
+                  alt='voyage'></img>
+                )}
+            </label>
+            <input
+              style={{ display: 'none' }}
+              type='file'
+              className='custom-file-input'
+              id='customFile'
+              accept="image/x-png,image/gif,image/jpeg"
+              onChange={onChange}
+            >
+            </input>
 
             <input type="submit" className="valider" />
           </form>
