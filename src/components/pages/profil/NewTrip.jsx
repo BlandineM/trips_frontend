@@ -122,9 +122,9 @@ function NewTrip() {
               <label htmlFor="year"></label>
               <input type="number" id="year" placeholder="1970" min="1970" onChange={evt => setYear(evt.target.value)}></input>
             </div>
-            {(month === undefined || year === undefined)
+            {(month === undefined || year === undefined || country === undefined)
               ? ""
-              : <h3>{moment().set({'year': year, 'month': month}).isSameOrBefore(moment())  ? "Tu es parties" : "Tu vas partir"} {countries[country-1].name} au mois de {monthList[parseInt(month) - 1]} en {year}</h3>
+              : <h3>{moment().set({'year': year, 'month': month}).isSameOrBefore(moment())  ? "Tu es parties" : "Tu vas partir"} {countries[country-840].name} au mois de {monthList[parseInt(month) - 1]} en {year}</h3>
             }
 
             <input type="submit" className="valider" />
