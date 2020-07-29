@@ -59,7 +59,6 @@ function NewTrip() {
     formData.append('country', country);
     formData.append('month', month);
     formData.append('year', year);
-    formData.append('check', check);
     formData.append('description', description);
     return Axios.post(`${apiSite}/me/trip`, formData,
       {
@@ -70,7 +69,7 @@ function NewTrip() {
       }
     )
 
-  }
+  }}
   return (
     <div>
       <NavLink to={`/profil`}>
