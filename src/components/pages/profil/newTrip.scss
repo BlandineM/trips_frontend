@@ -12,13 +12,10 @@
     background-color: rgba(255,164,27,0.3);
     border-radius: 20px;
     height: 50%;
-    ul{
-      display: flex;
-      li{
-        list-style-type: none;
-        margin: auto;
-        font-size: 1.2em;
-      }
+    width: 70%;
+    overflow: auto;
+    .nameVisiting, .yearVisiting, .flagVisiting{
+      width: 30%;
     }
   }
   .nextTrip{

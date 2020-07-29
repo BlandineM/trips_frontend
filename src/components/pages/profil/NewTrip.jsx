@@ -89,12 +89,11 @@ function NewTrip() {
               return (
                 <tbody key={i}>
                   <tr >
-
-                    <td><img src={visit.flag} alt={visit.country_name} /></td>
-                    <td >
-                      {visit.country_nameFr=! undefined? visit.country_nameFr:visit.country_name}
+                    <td className="flagVisiting"><img src={visit.flag} alt={visit.country_name} className="flagTripPassed"/></td>
+                    <td className="nameVisiting">
+                      {visit.country_nameFr =! undefined? visit.country_nameFr:visit.country_name}
                     </td>
-                    <td>{visit.year===0?"Année non connu": visit.year}</td>
+                    <td className="yearVisiting">{visit.year===0?"Année non connu": visit.year}</td>
 
                   </tr>
                 </tbody>
