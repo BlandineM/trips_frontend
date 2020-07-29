@@ -117,7 +117,7 @@ function NewTrip() {
                   id="countries"
                   onChange={selectCountry}
                   options={countries.map((country) => {
-                    return {value: country.id_countries, label: country.nameFr!=undefined?country.nameFr : country.name}
+                    return {value: country.id_countries, label: country.nameFr =! undefined?country.nameFr : country.name}
                   })}
                   isSearchable="true"
               />
