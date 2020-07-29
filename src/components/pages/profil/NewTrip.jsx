@@ -143,26 +143,37 @@ function NewTrip() {
               ? ""
               : <h3>{moment().set({'year': year, 'month': month}).isSameOrBefore(moment())  ? "Tu es parties" : "Tu vas partir"} {countries[country-840].name} au mois de {monthList[parseInt(month) - 1]} en {year}</h3>
             }
-            <label for="story">Quelques lignes sur ton voyage:</label>
+            {(month === undefined || year === undefined || country === undefined)
+              ? ""
+              : <div>
 
-            <textarea id="story" name="story"
-              rows="5" cols="33" onChange={evt => setDescription(evt.target.value)}>
-            </textarea>
-            <label className='custom-file-label' htmlFor='customFile'>
-              {preview ? <img src={preview} alt="profil" />
-                : (<img src={('https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
-                  alt='voyage'></img>
-                )}
-            </label>
-            <input
-              style={{ display: 'none' }}
-              type='file'
-              className='custom-file-input'
-              id='customFile'
-              accept="image/x-png,image/gif,image/jpeg"
-              onChange={onChange}
-            >
-            </input>
+                {moment().set({'year': year, 'month': month}).isSameOrBefore(moment())  
+                ?<div>
+                
+                <label for="story">Quelques lignes sur ton voyage:</label>
+                
+                <textarea id="story" name="story"
+                  rows="5" cols="33" onChange={evt => setDescription(evt.target.value)}>
+                </textarea>
+                <label className='custom-file-label' htmlFor='customFile'>
+                  {preview ? <img src={preview} alt="profil" />
+                    : (<img src={('https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
+                      alt='voyage'></img>
+                    )}
+                </label>
+                <input
+                  style={{ display: 'none' }}
+                  type='file'
+                  className='custom-file-input'
+                  id='customFile'
+                  accept="image/x-png,image/gif,image/jpeg"
+                  onChange={onChange}
+                >
+                </input> 
+                </div>
+                : ""}
+              </div>}
+            
 
             <input type="submit" className="valider" />
           </form>
