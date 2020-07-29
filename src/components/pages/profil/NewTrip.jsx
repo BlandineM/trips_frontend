@@ -92,9 +92,9 @@ function NewTrip() {
 
                     <td><img src={visit.flag} alt={visit.country_name} /></td>
                     <td >
-                      {visit.country_name}
+                      {visit.country_nameFr=! undefined? visit.country_nameFr:visit.country_name}
                     </td>
-                    <td>{visit.year}</td>
+                    <td>{visit.year===0?"Année non connu": visit.year}</td>
 
                   </tr>
                 </tbody>
@@ -117,7 +117,7 @@ function NewTrip() {
                   id="countries"
                   onChange={selectCountry}
                   options={countries.map((country) => {
-                    return {value: country.id_countries, label: country.name}
+                    return {value: country.id_countries, label: country.nameFr!=undefined?country.nameFr : country.name}
                   })}
                   isSearchable="true"
               />
