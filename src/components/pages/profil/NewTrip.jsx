@@ -3,19 +3,21 @@ import { useSelector } from "react-redux";
 import Axios from 'axios';
 import "./newTrip.scss"
 import { NavLink } from "react-router-dom";
+import moment from 'moment';
+import Select from 'react-select';
 
 const { apiSite } = require("../../../conf")
 function NewTrip() {
   const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState([]);
-  const [year, setYear] = useState([]);
+  const [country, setCountry] = useState();
+  const [year, setYear] = useState();
   const [month, setMonth] = useState();
-  const [check, setCheck] = useState(null);
   const [preview, setPreview] = useState('')
   const [file, setFile] = useState('')
   const [description, setDescription] = useState('')
+
   const toPassed = useSelector(state => state.LastTrip);
-  const mois = [
+  const monthList = [
     "Janvier",
     "Février",
     "Mars",
@@ -42,13 +44,21 @@ function NewTrip() {
     })
   }, [])
 
+  function selectCountry(selectedCountry) {
+    setCountry(selectedCountry.value );
+  }
+
+  function selectMonth(selectedMonth) {
+    setMonth(selectedMonth.value );
+  }
+
   function valider(e) {
+    if(country  !== undefined && month !== undefined && year !== undefined){
     const formData = new FormData();
     formData.append('file', file);
     formData.append('country', country);
     formData.append('month', month);
     formData.append('year', year);
-    formData.append('check', check);
     formData.append('description', description);
     return Axios.post(`${apiSite}/me/trip`, formData,
       {
@@ -58,7 +68,8 @@ function NewTrip() {
         }
       }
     )
-  }
+
+  }}
   return (
     <div>
       <NavLink to={`/profil`}>
@@ -78,12 +89,11 @@ function NewTrip() {
               return (
                 <tbody key={i}>
                   <tr >
-
-                    <td><img src={visit.flag} alt={visit.country_name} /></td>
-                    <td >
-                      {visit.country_name}
+                    <td className="flagVisiting"><img src={visit.flag} alt={visit.country_name} className="flagTripPassed"/></td>
+                    <td className="nameVisiting">
+                      {visit.country_nameFr =! undefined? visit.country_nameFr:visit.country_name}
                     </td>
-                    <td>{visit.year}</td>
+                    <td className="yearVisiting">{visit.year===0?"Année non connu": visit.year}</td>
 
                   </tr>
                 </tbody>
@@ -100,60 +110,69 @@ function NewTrip() {
             <h1>Ajoute un voyage?</h1>
 
             <div className="country">
-              <label htmlFor="countries">Pays:</label>
-              <input list="countries" onChange={evt => setCountry(evt.target.value)} />
-              <datalist name="countries" id="countries">
-                {countries.map((country) => {
-                  return (<option data-value={country.id_countries} value={country.id_countries} key={country.id_countries}></option>)
-                })}
-              </datalist>
+              <h1>Pays:</h1>
+              <label htmlFor="countries"></label>
+              <Select
+                  id="countries"
+                  onChange={selectCountry}
+                  options={countries.map((country) => {
+                    return {value: country.id_countries, label: country.nameFr =! undefined?country.nameFr : country.name}
+                  })}
+                  isSearchable="true"
+              />
             </div>
 
             <div className="monthly">
-              <label htmlFor="month" >Période: </label>
-              <input list="month" onChange={evt =>
-                setMonth(evt.target.value)}
+              <h1>Période:</h1>
+              <label htmlFor="month" ></label>
+              <Select
+                  id="month"
+                  onChange={selectMonth}
+                  options={monthList.map((month, i) => {
+                    return {value: i+1, label: month}
+                  })}
+                  isSearchable="true"
               />
-              <datalist name="month" id="month">
-                {mois.map((country, i) => {
-                  return (<option value={i + 1} data-value={country} key={i}></option>)
-                })}
-              </datalist>
-              {/* <input type="hidden" name="answer" id="answerInput-hidden"></input> */}
-              <label htmlFor="year">Année:</label>
-              <input type="number" id="year" placeholder="1970" min="1970" onChange={evt => setYear(evt.target.value)}></input>
-            </div>
 
-            <div>
-              <input type="radio" value="1" id="checkCoice1" name="check" onChange={evt => setCheck(evt.target.value)} />
-              <label htmlFor="checkCoice1">Fait</label>
-              <input type="radio" value="0" id="checkCoice2" name="check" onChange={evt => setCheck(evt.target.value)} />
-              <label htmlFor="checkCoice2">A faire</label>
+              <label htmlFor="year"></label>
+
+              <input type="number" id="year" placeholder="1900" min="1900" onChange={evt => setYear(evt.target.value)}></input>
             </div>
-            {check === null
+            {(month === undefined || year === undefined || country === undefined)
               ? ""
-              : <h3>{check === "1" ? "Tu es parties" : "Tu vas partir"} {country} au mois de {mois[parseInt(month) - 1]} en {year}</h3>
+              : <h3>{moment().set({'year': year, 'month': month}).isSameOrBefore(moment())  ? "Tu es parties" : "Tu vas partir"} {countries[country-840].name} au mois de {monthList[parseInt(month) - 1]} en {year}</h3>
             }
-            <label for="story">Quelques lignes sur ton voyage:</label>
+            {(month === undefined || year === undefined || year<1900 || country === undefined )
+              ? ""
+              : <div>
 
-            <textarea id="story" name="story"
-              rows="5" cols="33" onChange={evt => setDescription(evt.target.value)}>
-            </textarea>
-            <label className='custom-file-label' htmlFor='customFile'>
-              {preview ? <img src={preview} alt="profil" />
-                : (<img src={('https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
-                  alt='voyage'></img>
-                )}
-            </label>
-            <input
-              style={{ display: 'none' }}
-              type='file'
-              className='custom-file-input'
-              id='customFile'
-              accept="image/x-png,image/gif,image/jpeg"
-              onChange={onChange}
-            >
-            </input>
+                {moment().set({'year': year, 'month': month}).isSameOrBefore(moment())  
+                ?<div>
+                
+                <label htmlFor="story">Quelques lignes sur ton voyage:</label>
+                
+                <textarea id="story" name="story"
+                  rows="5" cols="33" onChange={evt => setDescription(evt.target.value)}>
+                </textarea>
+                <label className='custom-file-label' htmlFor='customFile'>
+                  {preview ? <img src={preview} alt="profil" />
+                    : (<img src={('https://res.cloudinary.com/blandine/image/upload/v1585844046/avatar/none.png')}
+                      alt='voyage'></img>
+                    )}
+                </label>
+                <input
+                  style={{ display: 'none' }}
+                  type='file'
+                  className='custom-file-input'
+                  id='customFile'
+                  accept="image/x-png,image/gif,image/jpeg"
+                  onChange={onChange}
+                >
+                </input> 
+                </div>
+                : ""}
+              </div>}
+            
 
             <input type="submit" className="valider" />
           </form>
