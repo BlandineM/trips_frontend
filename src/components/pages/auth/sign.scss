@@ -1,0 +1,101 @@
+.form{
+  margin: 5% auto;
+  width: 40%;
+  border-radius: 4%;
+  height: 20em;
+  color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: white;
+  border-width: 3px;
+  border-style: solid;
+  border-image: 
+    linear-gradient(
+      to bottom, 
+      red, 
+      rgba(0, 0, 0, 0)
+    ) 1 100%;
+}
+
+.choice{
+  display: flex;
+  color: rgba(0, 80, 130, 1);
+  justify-content: center;
+  height: auto;
+
+  .signin, .signup{
+    height: 8vh;
+    width: 100%;
+    background-color:rgba(129, 245, 255, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .signin{
+    border-top-left-radius: 40px;
+
+  }
+  .signup{
+    border-top-right-radius: 40px;
+  }
+  .select{
+    background-color:rgba(129, 245, 255, .8);
+    font-weight: bold;
+    font-size: 1.4em;
+  }
+}
+
+.connexion{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: rgba(0, 80, 130, 1);
+  background-color: rgba(129, 245, 255, .8);
+  height: 18em;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  h2{
+    text-align: center;
+    color: #ed6663;
+    font-size: .9em;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+  label{
+    input{
+      margin: 8% 25px ;
+      border-radius: 4%;
+      background: transparent;
+	    border: none;
+	    border-bottom: 1px dashed #83A4C5;
+      color: rgba(0, 80, 130, 1);
+    }
+    #login{
+      text-transform: lowercase;
+    }
+  }
+  .login, .name{
+    margin-left: 23%;
+  }
+
+  .button{
+    cursor:pointer;
+    width: 59%;
+    background-color: transparent;
+    border-color: #ffa41b;
+    color: #ffa41b;
+    border-radius: 50px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.5em;
+    transition: all 1s ease-out;
+  }
+  .button:hover{
+    background-color: #ffa41b;
+    color: #1f2e4b;
+  }
+}
+

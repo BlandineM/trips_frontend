@@ -1,0 +1,84 @@
+.main {
+  h1 {
+    color: rgba(0, 80, 130, 1);
+    font-size: 2.4em;
+  }
+  .destinations {
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    .cards {
+      .image {
+        .info_countries{
+          .tripper, .precipitation, .weather{
+            font-size: 0.9em;
+            position: absolute;
+          }
+          .tripper{
+            top: 50%;
+            right:20%;
+          }
+          .thermometer, .rain{
+            visibility: hidden;
+            opacity: 1;
+            position: absolute;
+            right: 3%;
+            fill:white;
+          }
+          .thermometer{
+            top: 55%;
+            width: 5%
+          }
+          .rain{
+            top: 25%;
+            width: 3%
+          }
+          .precipitation, .weather{
+            right:-38%;
+          }
+          .precipitation{
+            top: 20%;
+          }
+          .weather{
+            top: 50%;
+          }
+          .title_country, .info_country{
+            visibility: hidden;
+            position: absolute;
+          }
+          .title_country {
+            width: 100%;
+            text-align: center;
+          }
+          .info_country{
+            width: 10%;
+            margin: 10% 5%;
+            top: -25%;
+          }
+        }
+      }
+
+      .destinationPicture {
+        height: 30vh;
+        box-shadow: 8px, 8px, 8px, white;
+        border-radius: 20px;
+      }
+    }
+
+    .cards:hover {
+      .info_countries{
+        background-color: rgba(1, 3, 5, 0.5);
+        width: 100%;
+        height: 10vh;
+        position: absolute;
+        top: 67%;
+        border-bottom-left-radius:20px ;
+        border-bottom-right-radius:20px ;
+        .title_country, .info_country, .weather, .precipitation, .thermometer, .rain {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

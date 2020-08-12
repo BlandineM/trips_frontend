@@ -1,0 +1,73 @@
+.containerSuggest {
+  height: 370px;
+  top: 80px;
+  display: flex;
+  margin-left: 12%;
+  margin-top: 1%;
+  margin-bottom: 3%;
+  .cardSugges {
+    display: flex;
+    height: 350px;
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1rem 0 3rem #000;
+    transition: 0.4s ease-out;
+    position: relative;
+    left: 0px;
+    margin-top: 3%;
+    border-bottom:thick double #32a1ce; ;
+    .flagSugges {
+      position: absolute;
+      top: 7px;
+    }
+    .titleSugges {
+      color: #38A2D6;
+      font-size: 1.5em;
+      font-weight: 1000;
+      position: absolute;
+      left: 85px;
+      top: 180px;
+      text-transform: uppercase;
+    }
+    .periodSugges {
+      color: rgb(5, 4, 4);
+      font-weight: 300;
+      position: absolute;
+      left: 20px;
+      top: 225px;
+    }
+        .tempSugges {
+      color: rgb(5, 4, 4);
+      font-weight: 300;
+      position: absolute;
+      left: 20px;
+      top: 260px;
+    }
+        .precSugges {
+      color: rgb(5, 4, 4);
+      font-weight: 300;
+      position: absolute;
+      left: 130px;
+      top: 260px;
+    }
+
+  }
+  .cardSugges:not(:first-child) {
+      margin-left: -50px;
+  }
+  .cardSugges:hover {
+    transform: translateY(-20px);
+    transition: 0.4s ease-out;
+  }
+  .cardSugges:hover ~ .cardSugges {
+    position: relative;
+    left: 50px;
+    transition: 0.4s ease-out;
+  }
+  .cardSugges:hover .filledbar {
+    width: 120px;
+    transition: 0.4s ease-out;
+  }
+
+}

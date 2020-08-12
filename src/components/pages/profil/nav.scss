@@ -1,0 +1,26 @@
+.choice-profil{
+  display: flex;
+  justify-content: space-evenly;
+  width: 85%;
+  margin: auto;
+  background-color: #faa430;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 10px 5px 10px #f7bc6f;
+}
+  .map, .liste{
+    text-align: center;
+    width: 50%;
+    border-radius: 4%;
+    margin: 0 5%;
+  }
+  .map:hover, .liste:hover{
+    border-bottom: solid 2px;
+    border-bottom-color: #031139;
+  }
+  .selected{
+    border-bottom: solid 2px;
+    border-bottom-color: #031139;
+    font-weight: bold;
+    font-size: 1.7em;
+  }

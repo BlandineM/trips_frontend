@@ -1,0 +1,44 @@
+.header{
+  font-family: 'Lora', serif;
+  display: flex;
+  background-color: #031139;
+  color:#faa430;
+  height: 2%;
+  .logo{
+    width: 10%;
+    img{
+      margin: 2%;
+    }
+  }
+  .nav{
+    width: 100%;
+    ul{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      a{
+        color:#faa430;
+        text-align: end;
+        font-size: 1.5em;
+        li{
+          list-style: none;
+          margin: 1% 5%;
+        
+        }
+        .avatar-header{
+          margin-top: 20%;
+          height: 150px;
+          width: 150px;
+          border-radius: 50%;
+        }
+      }
+      li{
+        list-style:none;
+        font-size: 1.3em;
+      }
+      .destinations{
+        margin-top: 4%;
+      }
+    }
+  }
+}
